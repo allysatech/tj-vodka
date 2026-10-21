@@ -392,12 +392,12 @@ export function HeroProductStage() {
               <div
                 ref={heroMirrorRef}
                 aria-hidden="true"
-                className="hero-mirror-reflection pointer-events-none -mt-1 sm:-mt-2 pb-1 select-none will-change-transform"
+                className="hero-mirror-reflection pointer-events-none -mt-0.5 sm:-mt-1 w-full px-6 pb-3 select-none will-change-transform"
               >
-                <div style={{ opacity: 0 }} className="hero-intro-word">
+                <div style={{ opacity: 0 }} className="hero-intro-word w-full">
                   <div
                     style={{ transform: "scaleX(1.1) scaleY(-1)" }}
-                    className="flex items-center justify-center gap-[0.18em] sm:gap-[0.22em] md:gap-[0.26em] whitespace-nowrap font-display text-[clamp(2.9rem,10.2vw,10.2rem)] uppercase leading-[0.88] tracking-[0.04em] text-[#BDBDBD]/95 blur-[0.4px]"
+                    className="flex items-center justify-center gap-[0.18em] sm:gap-[0.22em] md:gap-[0.26em] whitespace-nowrap font-display text-[clamp(2.9rem,10.2vw,10.2rem)] uppercase leading-[0.92] tracking-[0.04em] text-[#BDBDBD]/95 blur-[0.4px]"
                   >
                     <span>{SITE_CONTENT.hero.titleLeft}</span>
                     <span>{SITE_CONTENT.hero.titleRight}</span>
