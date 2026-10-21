@@ -322,8 +322,9 @@ export function HeroProductStage() {
             }}
             className="relative flex h-full w-full items-center justify-center will-change-transform"
           >
-            {/* Subtle silver rim glow behind bottle */}
-            <div className="absolute inset-x-4 inset-y-10 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,245,245,0.22)_0%,rgba(189,189,189,0.06)_48%,transparent_75%)] blur-xl" />
+            {/* Studio rim glow + dark contrast core behind bottle so it stays highlighted */}
+            <div className="absolute -inset-x-6 inset-y-4 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(8,8,8,0.82)_0%,rgba(8,8,8,0.48)_42%,transparent_74%)] blur-lg" />
+            <div className="absolute inset-x-2 inset-y-8 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,245,245,0.28)_0%,rgba(189,189,189,0.1)_48%,transparent_75%)] blur-xl" />
             <img
               src={MEDIA_SLOTS.M01.src}
               alt={MEDIA_SLOTS.M01.alt}
@@ -331,7 +332,7 @@ export function HeroProductStage() {
               height={MEDIA_SLOTS.M01.dimensions.height}
               fetchPriority="high"
               decoding="sync"
-              className="bw-enforced-media relative z-10 h-full w-full object-contain drop-shadow-[0_28px_54px_rgba(0,0,0,0.95)]"
+              className="bw-enforced-media bottle-highlight-filter relative z-10 h-full w-full object-contain"
             />
           </div>
         </div>
@@ -500,9 +501,25 @@ export function HeroProductStage() {
         id="vodka"
         ref={productSectionRef}
         aria-label="The Vodka — Product Explorer"
-        className="hwayo-monochrome-surface relative z-20 scroll-mt-20 border-b border-[#BDBDBD]/15 py-20 md:py-28 lg:py-36"
+        className="relative z-20 overflow-hidden scroll-mt-20 border-b border-[#BDBDBD]/15 bg-[#050505] py-20 md:py-28 lg:py-36"
       >
-        <div className="mx-auto max-w-[1400px] px-6 md:px-12">
+        {/* Background Image 2 ("SMOOTHER THAN YOUR AVERAGE" warped monochrome artwork) at 50% opacity */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 flex items-center justify-start overflow-hidden"
+        >
+          <img
+            src="/media/bw/m04-vodka-bg-smoother-bw.jpg"
+            alt=""
+            style={{ opacity: 0.5 }}
+            className="bw-enforced-media h-full w-full object-cover object-left select-none"
+          />
+          {/* Subtle top/bottom edge blend & right-side readability vignette */}
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,#050505_0%,transparent_12%,transparent_88%,#050505_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,transparent_46%,rgba(5,5,5,0.82)_66%,#050505_100%)]" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-12">
           <div className="grid grid-cols-1 items-center gap-10 min-[540px]:grid-cols-12 min-[540px]:gap-8 md:gap-12 lg:gap-16">
             {/* Left Column: Bottle Showcase Slot (M04 target for descending M01 bottle) */}
             <div className="relative flex flex-col items-center justify-center min-[540px]:col-span-5 lg:col-span-6">
@@ -514,11 +531,16 @@ export function HeroProductStage() {
                 TJ VODKA · SIGNATURE 70CL
               </span>
 
-              {/* Subtle pedestal / spotlight frame */}
+              {/* Pedestal & Spotlight Halo so the TJ Vodka bottle stays clearly highlighted in front of the 50% background */}
               <div className="relative flex w-full items-center justify-center py-6">
+                {/* Soft studio spotlight halo + contrast cushion behind the bottle */}
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute bottom-6 h-8 w-48 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,245,245,0.14)_0%,transparent_75%)] blur-md"
+                  className="pointer-events-none absolute inset-y-2 w-[260px] sm:w-[310px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,245,245,0.22)_0%,rgba(8,8,8,0.65)_48%,transparent_76%)] blur-xl"
+                />
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute bottom-4 h-9 w-52 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,245,245,0.28)_0%,rgba(189,189,189,0.08)_55%,transparent_78%)] blur-md"
                 />
 
                 {/* Target Anchor Slot where the continuous bottle settles */}

@@ -108,6 +108,17 @@ video:active,
   -webkit-filter: grayscale(100%) !important;
 }
 
+/* Highlighted bottle cutout filter (strictly 100% grayscale + studio silver rim & deep shadow) */
+img.bottle-highlight-filter,
+img.bottle-highlight-filter:hover,
+img.bottle-highlight-filter:focus {
+  filter: grayscale(100%) drop-shadow(0 0 24px rgba(245, 245, 245, 0.28))
+    drop-shadow(0 26px 48px rgba(0, 0, 0, 0.96)) !important;
+  -webkit-filter: grayscale(100%)
+    drop-shadow(0 0 24px rgba(245, 245, 245, 0.28))
+    drop-shadow(0 26px 48px rgba(0, 0, 0, 0.96)) !important;
+}
+
 /* Accessible focus outlines using silver accent #BDBDBD */
 a:focus-visible,
 button:focus-visible,
