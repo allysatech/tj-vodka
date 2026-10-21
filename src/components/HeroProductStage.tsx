@@ -99,7 +99,7 @@ export function HeroProductStage() {
       const deltaX = endX - startX;
       const deltaY = endY - startY;
       const endScale = Math.min(
-        1.05,
+        1.75,
         Math.max(0.84, prodRect.height / Math.max(1, heroRect.height))
       );
 
@@ -110,7 +110,7 @@ export function HeroProductStage() {
       const easedBottle = easeInOutCubic(progress);
 
       // Counter-rotate from 0deg to -HERO_REST_TILT_DEG so net bottle rotation goes from +11.5deg (Hero) to 0deg (Section 02)
-      const startScale = 1.06;
+      const startScale = 1.04;
       const curX = deltaX * easedBottle;
       const curY = deltaY * easedBottle;
       const curScale = startScale + (endScale - startScale) * easedBottle;
@@ -150,10 +150,10 @@ export function HeroProductStage() {
         heroMirrorRef.current.style.opacity = `${mirrorOpacity.toFixed(3)}`;
       }
 
-      // Hero slogan, subtitle & CTAs clear upward early so bottle never covers readable text
+      // Hero slogan, subtitle & CTAs fade cleanly without colliding upward into the bottle
       if (heroCopyWrapRef.current) {
-        const pCopy = clamp01(progress / 0.38);
-        const copyY = -75 * pCopy;
+        const pCopy = clamp01(progress / 0.42);
+        const copyY = -14 * pCopy;
         const copyOpacity = 1 - pCopy;
         heroCopyWrapRef.current.style.transform = `translate3d(0px, ${copyY.toFixed(
           1
@@ -345,7 +345,7 @@ export function HeroProductStage() {
         id="hero"
         ref={heroSectionRef}
         aria-label="Hero — TJ Vodka"
-        className="relative flex min-h-[100svh] w-full flex-col justify-between pt-24 pb-12 md:pt-28 md:pb-14 border-b border-[#BDBDBD]/15"
+        className="relative flex min-h-[100svh] w-full flex-col justify-between pt-16 pb-3 md:pt-[72px] md:pb-4 border-b border-[#BDBDBD]/15"
       >
         {/* Media M02: Monochrome studio-light background layer (separate from bottle & text) */}
         <div
@@ -363,9 +363,9 @@ export function HeroProductStage() {
         </div>
 
         {/* Center Hero Stage: Bold Blocky "TJ VODKA" + Mirror Effect BEHIND the Central Bottle */}
-        <div className="relative z-10 mx-auto my-auto flex w-full max-w-[1400px] flex-col items-center justify-center px-6 py-4 md:px-12">
+        <div className="relative z-10 mx-auto my-auto flex w-full max-w-[1400px] flex-col items-center justify-center px-6 py-1 md:px-12">
           {/* Layered Stage where "TJ VODKA" & its Mirror Reflection sit directly BEHIND the Bottle */}
-          <div className="relative flex w-full items-center justify-center py-2 sm:py-4">
+          <div className="relative flex w-full items-center justify-center py-0.5 sm:py-1">
             {/* Z-10 LAYER (BEHIND BOTTLE): Heavy Geometric Display "TJ VODKA" + Mirror Reflection Underneath */}
             <div
               ref={heroTextWrapRef}
@@ -375,7 +375,7 @@ export function HeroProductStage() {
               <div style={{ opacity: 0 }} className="hero-intro-word">
                 <div
                   style={{ transform: "scaleX(1.1)" }}
-                  className="flex items-center justify-center gap-[0.18em] sm:gap-[0.22em] md:gap-[0.26em] whitespace-nowrap font-display text-[clamp(2.9rem,10.2vw,10.2rem)] uppercase leading-[0.88] tracking-[0.04em] text-[#F5F5F5] drop-shadow-[0_12px_32px_rgba(0,0,0,0.85)]"
+                  className="flex items-center justify-center gap-[0.18em] sm:gap-[0.22em] md:gap-[0.26em] whitespace-nowrap font-display text-[clamp(2.6rem,9.2vw,9.4rem)] uppercase leading-[0.88] tracking-[0.04em] text-[#F5F5F5] drop-shadow-[0_12px_32px_rgba(0,0,0,0.85)]"
                 >
                   <span>{SITE_CONTENT.hero.titleLeft}</span>
                   <span>{SITE_CONTENT.hero.titleRight}</span>
@@ -397,7 +397,7 @@ export function HeroProductStage() {
                 <div style={{ opacity: 0 }} className="hero-intro-word w-full">
                   <div
                     style={{ transform: "scaleX(1.1) scaleY(-1)" }}
-                    className="flex items-center justify-center gap-[0.18em] sm:gap-[0.22em] md:gap-[0.26em] whitespace-nowrap font-display text-[clamp(2.9rem,10.2vw,10.2rem)] uppercase leading-[0.92] tracking-[0.04em] text-[#BDBDBD]/95 blur-[0.4px]"
+                    className="flex items-center justify-center gap-[0.18em] sm:gap-[0.22em] md:gap-[0.26em] whitespace-nowrap font-display text-[clamp(2.6rem,9.2vw,9.4rem)] uppercase leading-[0.92] tracking-[0.04em] text-[#BDBDBD]/95 blur-[0.4px]"
                   >
                     <span>{SITE_CONTENT.hero.titleLeft}</span>
                     <span>{SITE_CONTENT.hero.titleRight}</span>
@@ -406,15 +406,15 @@ export function HeroProductStage() {
               </div>
             </div>
 
-            {/* Z-20 / Z-30 FOREGROUND BOTTLE ANCHOR SLOT (In front of "TJ VODKA" & Mirror) */}
+            {/* Z-20 / Z-30 FOREGROUND BOTTLE ANCHOR SLOT (In front of "TJ VODKA" & Mirror, scaled with svh so all Hero details fit in 1 viewport on laptops) */}
             <div
               ref={heroBottleAnchorRef}
-              className="relative z-20 h-[290px] w-[145px] sm:h-[360px] sm:w-[180px] md:h-[430px] md:w-[215px] lg:h-[470px] lg:w-[235px]"
+              className="relative z-20 h-[clamp(200px,35svh,360px)] w-[clamp(100px,17.5svh,180px)] sm:h-[clamp(220px,37svh,390px)] sm:w-[clamp(110px,18.5svh,195px)]"
             >
               {/* Studio floor shadow & subtle glass base reflection */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -bottom-3 left-1/2 h-6 w-36 -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.9)_0%,rgba(189,189,189,0.12)_55%,transparent_80%)] blur-[2px]"
+                className="pointer-events-none absolute -bottom-2 left-1/2 h-5 w-32 -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.9)_0%,rgba(189,189,189,0.12)_55%,transparent_80%)] blur-[2px]"
               />
               {reducedMotion && (
                 <MonochromeMedia
@@ -429,13 +429,13 @@ export function HeroProductStage() {
           {/* Slogan (Luxury Spirit Typography), Subtitle & Primary/Secondary CTAs */}
           <div
             ref={heroCopyWrapRef}
-            className="relative z-20 mt-6 flex max-w-2xl flex-col items-center text-center will-change-transform"
+            className="relative z-30 mt-2 sm:mt-3 flex max-w-2xl flex-col items-center text-center will-change-transform"
           >
             {/* Luxury Distillery Crest Divider */}
             <div
               aria-hidden="true"
               style={{ opacity: 0 }}
-              className="hero-intro-copy mb-2.5 flex items-center justify-center gap-3"
+              className="hero-intro-copy mb-1.5 flex items-center justify-center gap-3"
             >
               <span className="h-[1px] w-8 sm:w-12 bg-gradient-to-r from-transparent to-[#BDBDBD]/60" />
               <span className="font-cinzel text-[9px] uppercase tracking-[0.34em] text-[#BDBDBD]">
@@ -447,32 +447,32 @@ export function HeroProductStage() {
             {/* Slogan in Jost Medium */}
             <h1
               style={{ opacity: 0 }}
-              className="hero-intro-copy font-spirit text-[clamp(1.75rem,3.3vw,3rem)] font-medium tracking-[0.04em] bg-gradient-to-r from-[#BDBDBD] via-[#F5F5F5] to-[#BDBDBD] bg-clip-text text-transparent drop-shadow-[0_4px_18px_rgba(0,0,0,0.8)]"
+              className="hero-intro-copy font-spirit text-[clamp(1.5rem,2.6vw,2.5rem)] font-medium leading-[1.1] tracking-[0.04em] bg-gradient-to-r from-[#BDBDBD] via-[#F5F5F5] to-[#BDBDBD] bg-clip-text text-transparent drop-shadow-[0_4px_18px_rgba(0,0,0,0.8)]"
             >
               {SITE_CONTENT.hero.slogan}
             </h1>
 
             <p
               style={{ opacity: 0 }}
-              className="hero-intro-copy mt-3 max-w-md font-sans text-xs md:text-sm leading-relaxed text-[#A8A8A8]"
+              className="hero-intro-copy mt-1.5 max-w-md font-sans text-xs md:text-[13px] leading-relaxed text-[#A8A8A8]"
             >
               {SITE_CONTENT.hero.subtitle}
             </p>
 
             <div
               style={{ opacity: 0 }}
-              className="hero-intro-copy mt-7 flex flex-wrap items-center justify-center gap-4 sm:gap-6"
+              className="hero-intro-copy mt-3.5 sm:mt-4 flex flex-wrap items-center justify-center gap-3 sm:gap-5"
             >
               <a
                 href={SITE_CONTENT.hero.primaryCta.href}
                 onClick={handleScrollToVodka}
-                className="inline-flex items-center justify-center border border-[#F5F5F5] bg-[#F4F4F4] px-7 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-[#151515] transition-colors duration-200 hover:bg-transparent hover:text-[#F5F5F5]"
+                className="inline-flex items-center justify-center border border-[#F5F5F5] bg-[#F4F4F4] px-6 py-2.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-[#151515] transition-colors duration-200 hover:bg-transparent hover:text-[#F5F5F5]"
               >
                 {SITE_CONTENT.hero.primaryCta.label}
               </a>
               <Link
                 href={SITE_CONTENT.hero.secondaryCta.href}
-                className="inline-flex items-center gap-2 border border-[#BDBDBD]/50 bg-[#080808]/60 px-7 py-3.5 font-sans text-[11px] uppercase tracking-[0.2em] text-[#F5F5F5] transition-colors duration-200 hover:border-[#F5F5F5]"
+                className="inline-flex items-center gap-2 border border-[#BDBDBD]/50 bg-[#080808]/60 px-6 py-2.5 font-sans text-[11px] uppercase tracking-[0.2em] text-[#F5F5F5] transition-colors duration-200 hover:border-[#F5F5F5]"
               >
                 <span>{SITE_CONTENT.hero.secondaryCta.label}</span>
                 <span aria-hidden="true">→</span>
@@ -486,12 +486,12 @@ export function HeroProductStage() {
           <a
             href="#vodka"
             onClick={handleScrollToVodka}
-            className="group inline-flex flex-col items-center gap-2 font-sans text-[9px] uppercase tracking-[0.28em] text-[#A8A8A8] transition-colors hover:text-[#F5F5F5]"
+            className="group inline-flex flex-col items-center gap-1.5 font-sans text-[9px] uppercase tracking-[0.28em] text-[#A8A8A8] transition-colors hover:text-[#F5F5F5]"
           >
             <span>Scroll to Discover</span>
             <span
               aria-hidden="true"
-              className="block h-6 w-[1px] bg-gradient-to-b from-[#BDBDBD] to-transparent"
+              className="block h-4 w-[1px] bg-gradient-to-b from-[#BDBDBD] to-transparent"
             />
           </a>
         </div>
