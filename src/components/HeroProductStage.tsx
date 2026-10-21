@@ -105,7 +105,10 @@ export function HeroProductStage() {
 
       // Scroll distance over which the bottle travels from Hero center to Product Explorer slot
       const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-      const targetScroll = Math.max(420, endY - window.innerHeight * 0.48);
+      const vodkaTopInDoc = productSectionRef.current
+        ? productSectionRef.current.getBoundingClientRect().top - stageRect.top
+        : endY - window.innerHeight * 0.5;
+      const targetScroll = Math.max(280, vodkaTopInDoc - 68);
       const progress = clamp01(scrollY / targetScroll);
       const easedBottle = easeInOutCubic(progress);
 
@@ -500,12 +503,13 @@ export function HeroProductStage() {
       {/* =====================================================================
           SECTION 02: THE VODKA — PRODUCT EXPLORER (HWAYO-INSPIRED LAYOUT)
           Large bottle on the left; heading, 3 selectable tabs & specs on the right.
+          Fits 100% in 1 viewport on laptops/desktops and phones.
          ===================================================================== */}
       <section
         id="vodka"
         ref={productSectionRef}
         aria-label="The Vodka — Product Explorer"
-        className="relative z-20 overflow-hidden scroll-mt-20 border-b border-[#BDBDBD]/15 bg-[#050505] py-20 md:py-28 lg:py-36"
+        className="relative z-20 flex min-h-[calc(100svh-4rem)] w-full flex-col justify-center overflow-hidden scroll-mt-16 border-b border-[#BDBDBD]/15 bg-[#050505] py-5 sm:py-6 md:py-8 lg:py-10"
       >
         {/* Responsive Background ("SMOOTHER THAN YOUR AVERAGE" warped monochrome artwork) at 50% opacity */}
         <div
@@ -533,8 +537,8 @@ export function HeroProductStage() {
           <div className="hidden md:block absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,transparent_46%,rgba(5,5,5,0.82)_66%,#050505_100%)]" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-12">
-          <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-12 md:gap-12 lg:gap-16">
+        <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 md:px-12">
+          <div className="grid grid-cols-1 items-center gap-4 sm:gap-6 md:grid-cols-12 md:gap-10 lg:gap-14">
             {/* Left Column: Bottle Showcase Slot (M04 target for descending M01 bottle) */}
             <div className="relative flex flex-col items-center justify-center md:col-span-5 lg:col-span-6">
               {/* Vertical side label inspired by HWAYO reference */}
@@ -546,22 +550,22 @@ export function HeroProductStage() {
               </span>
 
               {/* Pedestal & Spotlight Halo so the TJ Vodka bottle stays clearly highlighted in front of the 50% background */}
-              <div className="relative flex w-full items-center justify-center py-6">
+              <div className="relative flex w-full items-center justify-center py-1 md:py-3">
                 {/* Soft studio spotlight halo + contrast cushion behind the bottle */}
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-y-2 w-[260px] sm:w-[310px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,245,245,0.22)_0%,rgba(8,8,8,0.65)_48%,transparent_76%)] blur-xl"
+                  className="pointer-events-none absolute inset-y-1 w-[220px] sm:w-[270px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,245,245,0.22)_0%,rgba(8,8,8,0.65)_48%,transparent_76%)] blur-xl"
                 />
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute bottom-4 h-9 w-52 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,245,245,0.28)_0%,rgba(189,189,189,0.08)_55%,transparent_78%)] blur-md"
+                  className="pointer-events-none absolute bottom-2 h-7 w-44 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,245,245,0.28)_0%,rgba(189,189,189,0.08)_55%,transparent_78%)] blur-md"
                 />
 
                 {/* Target Anchor Slot where the continuous bottle settles */}
                 <div
                   ref={productBottleAnchorRef}
                   data-media-slot="M04"
-                  className="relative z-20 h-[310px] w-[155px] sm:h-[360px] sm:w-[180px] md:h-[440px] md:w-[215px] lg:h-[490px] lg:w-[240px]"
+                  className="relative z-20 h-[clamp(170px,24svh,240px)] w-[clamp(85px,12svh,120px)] md:h-[clamp(280px,54svh,440px)] md:w-[clamp(140px,27svh,215px)]"
                 >
                   {reducedMotion && (
                     <MonochromeMedia
@@ -582,11 +586,11 @@ export function HeroProductStage() {
                 {SITE_CONTENT.productExplorer.eyebrow}
               </span>
 
-              <h2 className="mt-3 font-serif text-[clamp(2.5rem,5vw,4.5rem)] font-light leading-[1.02] tracking-[0.04em] text-[#F5F5F5]">
+              <h2 className="mt-1.5 font-serif text-[clamp(1.9rem,3.6vw,3.3rem)] font-light leading-[1.02] tracking-[0.04em] text-[#F5F5F5]">
                 {SITE_CONTENT.productExplorer.heading}
               </h2>
 
-              <p className="mt-2 font-spirit text-lg tracking-[0.03em] text-[#BDBDBD]">
+              <p className="mt-1 font-spirit text-sm md:text-base tracking-[0.03em] text-[#BDBDBD]">
                 {SITE_CONTENT.productExplorer.subheading}
               </p>
 
@@ -594,7 +598,7 @@ export function HeroProductStage() {
               <div
                 role="tablist"
                 aria-label="TJ Vodka Information Tabs"
-                className="mt-8 flex items-center gap-8 border-b border-[#BDBDBD]/25"
+                className="mt-4 md:mt-5 flex items-center gap-6 sm:gap-8 border-b border-[#BDBDBD]/25"
               >
                 {SITE_CONTENT.productExplorer.tabs.map((tab, idx) => {
                   const isSelected = activeTabId === tab.id;
@@ -611,7 +615,7 @@ export function HeroProductStage() {
                       tabIndex={isSelected ? 0 : -1}
                       onClick={() => setActiveTabId(tab.id)}
                       onKeyDown={(e) => handleTabKeyDown(e, idx)}
-                      className={`relative pb-3.5 font-sans text-xs uppercase tracking-[0.22em] transition-colors duration-200 ${
+                      className={`relative pb-2.5 font-sans text-[11px] md:text-xs uppercase tracking-[0.22em] transition-colors duration-200 ${
                         isSelected
                           ? "text-[#F5F5F5] font-medium"
                           : "text-[#A8A8A8] hover:text-[#F5F5F5]"
@@ -630,7 +634,7 @@ export function HeroProductStage() {
               </div>
 
               {/* Tab Panels */}
-              <div className="mt-7 min-h-[155px]">
+              <div className="mt-3.5 md:mt-4 min-h-[108px] md:min-h-[118px]">
                 {SITE_CONTENT.productExplorer.tabs.map((tab) => {
                   const isSelected = activeTabId === tab.id;
                   return (
@@ -643,13 +647,13 @@ export function HeroProductStage() {
                       tabIndex={0}
                       className="focus:outline-none"
                     >
-                      <h3 className="font-serif text-2xl font-normal text-[#F5F5F5]">
+                      <h3 className="font-serif text-lg md:text-xl font-normal text-[#F5F5F5]">
                         {tab.title}
                       </h3>
-                      <p className="mt-3 max-w-xl font-sans text-sm leading-[1.8] text-[#F5F5F5]/90">
+                      <p className="mt-1.5 max-w-xl font-sans text-xs md:text-[13px] leading-[1.65] text-[#F5F5F5]/90">
                         {tab.body}
                       </p>
-                      <p className="mt-3 font-sans text-[11px] leading-relaxed text-[#A8A8A8]">
+                      <p className="mt-1.5 font-sans text-[10px] leading-snug text-[#A8A8A8]">
                         {tab.note}
                       </p>
                     </div>
@@ -658,16 +662,16 @@ export function HeroProductStage() {
               </div>
 
               {/* Verified Specifications Row */}
-              <dl className="mt-8 grid grid-cols-3 gap-6 border-y border-[#BDBDBD]/20 py-6">
+              <dl className="mt-4 md:mt-5 grid grid-cols-3 gap-4 md:gap-6 border-y border-[#BDBDBD]/20 py-3 md:py-3.5">
                 {SITE_CONTENT.productExplorer.specifications.map((spec) => (
                   <div key={spec.label} className="flex flex-col">
                     <dt className="font-sans text-[9px] uppercase tracking-[0.22em] text-[#A8A8A8]">
                       {spec.label}
                     </dt>
-                    <dd className="mt-1.5 font-serif text-2xl md:text-3xl font-light text-[#F5F5F5]">
+                    <dd className="mt-0.5 font-serif text-xl md:text-2xl font-light text-[#F5F5F5]">
                       {spec.value}
                     </dd>
-                    <span className="mt-1 font-sans text-[10px] text-[#A8A8A8]">
+                    <span className="mt-0.5 font-sans text-[9px] md:text-[10px] leading-tight text-[#A8A8A8]">
                       {spec.detail}
                     </span>
                   </div>
@@ -675,14 +679,14 @@ export function HeroProductStage() {
               </dl>
 
               {/* CTA to Page 2 (/products/tj-vodka) */}
-              <div className="mt-9 flex flex-wrap items-center gap-6">
+              <div className="mt-4 md:mt-5 flex flex-wrap items-center gap-4 md:gap-6">
                 <Link
                   href={SITE_CONTENT.productExplorer.cta.href}
-                  className="inline-flex items-center justify-center border border-[#F5F5F5] bg-[#F4F4F4] px-8 py-4 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-[#151515] transition-colors duration-200 hover:bg-transparent hover:text-[#F5F5F5]"
+                  className="inline-flex items-center justify-center border border-[#F5F5F5] bg-[#F4F4F4] px-6 py-2.5 md:px-7 md:py-3 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-[#151515] transition-colors duration-200 hover:bg-transparent hover:text-[#F5F5F5]"
                 >
                   {SITE_CONTENT.productExplorer.cta.label}
                 </Link>
-                <span className="font-sans text-[11px] tracking-[0.12em] text-[#A8A8A8]">
+                <span className="font-sans text-[10px] md:text-[11px] tracking-[0.12em] text-[#A8A8A8]">
                   Live pricing &amp; availability on product page →
                 </span>
               </div>

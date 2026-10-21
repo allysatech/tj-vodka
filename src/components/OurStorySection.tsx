@@ -10,40 +10,57 @@ export function OurStorySection() {
     <section
       id="story"
       aria-label="Our Story"
-      className="relative scroll-mt-20 overflow-hidden border-y border-[#080808]/15 bg-[#EFEFEF] pt-10 pb-64 min-h-[650px] md:min-h-0 md:py-24 lg:py-28 text-[#080808]"
+      className="relative scroll-mt-16 flex h-[calc(100svh-4rem)] min-h-[540px] w-full flex-col justify-start md:justify-center overflow-hidden border-y border-[#080808]/15 bg-[#EFEFEF] pt-6 pb-8 md:py-10 text-[#080808]"
     >
       {/* Background Image (Desktop: wide right-aligned bottles; Mobile: 9:16 portrait 3-bottles + signature) */}
       <div
         data-media-slot="M03"
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-[#EFEFEF]"
       >
-        {/* Phone Viewport (< 768px): 9:16 portrait 3-bottles + founder signature background */}
+        {/* Phone Viewport (< 768px): 9:16 portrait 3-bottles + founder signature background, anchored to bottom so signature is never cut off */}
         <img
           src={bgSlot.mobileSrc ?? "/media/bw/m03-story-bg-mobile-bw.jpg"}
           alt={bgSlot.alt}
           width={576}
           height={1024}
-          className="bw-enforced-media block h-full w-full object-cover object-center md:hidden"
+          className="bw-enforced-media block h-full w-full object-cover object-bottom md:hidden"
         />
 
-        {/* Desktop & Tablet Viewport (>= 768px): wide 3-bottles + signature on the right */}
+        {/* Desktop & Laptop Viewport (>= 768px): Full-bleed paper texture + uncropped full-width 3 bottles & signature */}
         <img
           src={bgSlot.src}
-          alt={bgSlot.alt}
+          alt=""
           width={bgSlot.dimensions.width}
           height={bgSlot.dimensions.height}
-          className="bw-enforced-media hidden h-full w-full object-cover object-right md:block"
+          className="bw-enforced-media hidden h-full w-full object-cover object-left opacity-35 blur-[2px] md:block"
         />
+        <div
+          className="hidden md:flex absolute inset-0 items-center justify-end overflow-hidden"
+          style={{
+            WebkitMaskImage:
+              "linear-gradient(180deg, transparent 0%, black 8%, black 92%, transparent 100%)",
+            maskImage:
+              "linear-gradient(180deg, transparent 0%, black 8%, black 92%, transparent 100%)",
+          }}
+        >
+          <img
+            src={bgSlot.src}
+            alt={bgSlot.alt}
+            width={bgSlot.dimensions.width}
+            height={bgSlot.dimensions.height}
+            className="bw-enforced-media h-full w-full object-contain object-right"
+          />
+        </div>
 
         {/* Mobile top-to-bottom readability veil: keeps top copy crisp while revealing the 3 bottles & bottom signature cleanly */}
-        <div className="block md:hidden absolute inset-0 bg-[linear-gradient(180deg,rgba(243,243,243,0.80)_0%,rgba(243,243,243,0.74)_46%,rgba(243,243,243,0.15)_60%,transparent_70%)]" />
+        <div className="block md:hidden absolute inset-0 bg-[linear-gradient(180deg,rgba(243,243,243,0.84)_0%,rgba(243,243,243,0.74)_42%,rgba(243,243,243,0.14)_56%,transparent_68%)]" />
 
         {/* Desktop left-side paper-tone readability veil so copy stays razor-sharp while keeping the 3 bottles & right signature 100% clear */}
-        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-[#F3F3F3]/95 via-[#F3F3F3]/68 via-42% to-transparent" />
+        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-[#EFEFEF]/95 via-[#EFEFEF]/75 via-38% to-transparent" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-12">
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 md:px-12">
         {/* Left Story Copy (Right-side image box removed so background bottles & signature shine through) */}
         <div className="grid grid-cols-1 items-center md:grid-cols-12">
           <div className="flex flex-col items-start md:col-span-6 lg:col-span-5">
@@ -52,13 +69,13 @@ export function OurStorySection() {
               THE SPIRIT BEHIND THE LABEL
             </span>
 
-            <h2 className="mt-5 font-serif text-[clamp(2.4rem,4.6vw,4.1rem)] font-normal leading-[1.04] tracking-[0.01em] text-[#080808]">
+            <h2 className="mt-4 md:mt-5 font-serif text-[clamp(2.2rem,4.2vw,3.8rem)] font-normal leading-[1.04] tracking-[0.01em] text-[#080808]">
               {SITE_CONTENT.ourStory.heading}
             </h2>
 
-            <div className="mt-5 h-[1.5px] w-16 bg-[#080808]/65" />
+            <div className="mt-4 h-[1.5px] w-16 bg-[#080808]/65" />
 
-            <p className="mt-5 max-w-md font-sans text-sm md:text-[15px] font-medium leading-[1.8] text-[#141414]">
+            <p className="mt-4 max-w-md font-sans text-xs sm:text-sm md:text-[15px] font-medium leading-[1.75] text-[#141414]">
               {SITE_CONTENT.ourStory.paragraph}
             </p>
           </div>

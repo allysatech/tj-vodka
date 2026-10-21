@@ -253,9 +253,9 @@ export function WorldOfTjSection() {
     <section
       id="world"
       aria-label="The World of TJ"
-      className="relative scroll-mt-20 overflow-hidden border-b border-[#BDBDBD]/15 bg-[#050505] py-20 md:py-28 lg:py-32"
+      className="relative scroll-mt-16 flex min-h-[calc(100svh-4rem)] w-full flex-col justify-center overflow-hidden border-b border-[#BDBDBD]/15 bg-[#050505] py-8 md:py-10"
     >
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 md:px-12">
+      <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 md:px-12">
         {/* ===================================================================
             SMOOTH 60FPS 3D CURVED SHOWCASE
             - Starts with Image 4 (M08) at Center (#1)
@@ -266,7 +266,7 @@ export function WorldOfTjSection() {
         <div
           onMouseLeave={handleStageLeave}
           onContextMenu={(e) => e.preventDefault()}
-          className="select-none relative mx-auto flex h-[320px] sm:h-[370px] md:h-[470px] lg:h-[540px] w-full max-w-[1360px] items-center justify-center"
+          className="select-none relative mx-auto flex h-[clamp(280px,54svh,490px)] w-full max-w-[1360px] items-center justify-center"
           style={{ perspective: "1350px" }}
         >
           <div
@@ -282,7 +282,7 @@ export function WorldOfTjSection() {
                 style={getInitialCardStyle(idx)}
                 onMouseEnter={() => handleCardEnter(idx)}
                 onMouseMove={(e) => handleCardMove(e, idx)}
-                className="cursor-default select-none absolute left-1/2 top-1/2 h-[265px] w-[195px] sm:h-[310px] sm:w-[225px] md:h-[400px] md:w-[295px] lg:h-[475px] lg:w-[355px] overflow-hidden rounded-[24px] md:rounded-[30px] border border-white/20 bg-[#121212] shadow-[0_30px_80px_rgba(0,0,0,0.92)] will-change-transform"
+                className="cursor-default select-none absolute left-1/2 top-1/2 h-[clamp(245px,48svh,440px)] w-[clamp(180px,35.5svh,328px)] overflow-hidden rounded-[24px] md:rounded-[30px] border border-white/20 bg-[#121212] shadow-[0_30px_80px_rgba(0,0,0,0.92)] will-change-transform"
               >
                 <img
                   ref={(el) => {
@@ -314,7 +314,7 @@ export function WorldOfTjSection() {
         {/* ===================================================================
             CENTERED CIRCULAR LEFT / RIGHT SWITCH BUTTONS BELOW IMAGES
            =================================================================== */}
-        <div className="relative z-40 mt-10 md:mt-12 flex items-center justify-center gap-5">
+        <div className="relative z-40 mt-5 md:mt-7 flex items-center justify-center gap-5">
           <button
             type="button"
             onClick={handlePrev}
