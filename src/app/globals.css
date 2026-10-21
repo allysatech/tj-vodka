@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Jost";
+  src: url("/fonts/Jost-medium.woff") format("woff"),
+    url("https://cdn.shopify.com/s/files/1/0727/5583/9271/files/jost-medium.woff?v=1677681033")
+      format("woff");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg-primary: #080808;
+  --bg-surface: #141414;
+  --bg-light: #F4F4F4;
+  --text-on-dark: #F5F5F5;
+  --text-on-light: #151515;
+  --text-secondary: #A8A8A8;
+  --border-silver: #BDBDBD;
+  --font-jost: "Jost", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #080808;
+  color: #F5F5F5;
+  font-family: "Jost", sans-serif;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Jost", sans-serif !important;
+}
+
+body {
+  margin: 0;
+  background-color: #080808;
+  color: #F5F5F5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+.font-display {
+  font-family: var(--font-display), "Jost", Impact, "Arial Black", sans-serif !important;
+}
+
+.font-spirit,
+.font-cinzel,
+.font-serif,
+.font-sans {
+  font-family: "Jost", sans-serif !important;
+}
+
+/*
+ * MANDATORY DESIGN RULE:
+ * Every displayed photograph, product image, thumbnail, video, video poster and
+ * background image must appear in neutral BLACK AND WHITE at all times, including
+ * hover, focus, loading, mobile and open-gallery states.
+ * No return-to-colour hover effect.
+ */
+img,
+video,
+picture,
+canvas,
+.bw-enforced-media {
+  filter: grayscale(100%) !important;
+  -webkit-filter: grayscale(100%) !important;
+}
+
+img:hover,
+video:hover,
+img:focus,
+video:focus,
+img:active,
+video:active,
+.group:hover img,
+.group:hover video,
+.bw-enforced-media:hover,
+.bw-enforced-media:focus {
+  filter: grayscale(100%) !important;
+  -webkit-filter: grayscale(100%) !important;
+}
+
+/* Accessible focus outlines using silver accent #BDBDBD */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #BDBDBD;
+  outline-offset: 4px;
+}
+
+/* Subtle HWAYO-inspired monochrome silk/ripple light texture for Product Explorer */
+.hwayo-monochrome-surface {
+  background-color: #141414;
+  background-image:
+    radial-gradient(ellipse 65% 55% at 26% 50%, rgba(245, 245, 245, 0.09) 0%, rgba(20, 20, 20, 0.02) 55%, transparent 80%),
+    repeating-radial-gradient(
+      circle at 24% 52%,
+      rgba(255, 255, 255, 0.018) 0px,
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px,
+      transparent 28px
+    );
+}
+
+/* Ambient studio spotlight animation for Hero M02 layer */
+@keyframes studioSpotlightPulse {
+  0%, 100% {
+    opacity: 0.72;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.92;
+    transform: scale(1.04);
+  }
+}
+
+.studio-light-pulse {
+  animation: studioSpotlightPulse 8s ease-in-out infinite;
+}
+
+/* Mirror reflection fade mask under the HERO "TJ VODKA" typography */
+.hero-mirror-reflection {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.68) 0%,
+    rgba(0, 0, 0, 0.34) 38%,
+    rgba(0, 0, 0, 0.08) 74%,
+    transparent 96%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.68) 0%,
+    rgba(0, 0, 0, 0.34) 38%,
+    rgba(0, 0, 0, 0.08) 74%,
+    transparent 96%
+  );
+}
+
+/* 3D Coverflow Auto-Scroll Cards in Section 04 (The World of TJ) */
+.world-carousel-card {
+  transition: transform 950ms cubic-bezier(0.22, 1, 0.36, 1) !important,
+    opacity 950ms cubic-bezier(0.22, 1, 0.36, 1) !important,
+    border-color 950ms ease !important,
+    box-shadow 950ms ease !important;
+  will-change: transform, opacity;
+}
+
+.world-carousel-card[data-carousel-offset="4"] {
+  transition: none !important;
+}
