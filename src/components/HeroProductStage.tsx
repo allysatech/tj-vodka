@@ -372,12 +372,14 @@ export function HeroProductStage() {
               className="pointer-events-none absolute inset-x-0 top-[44%] z-10 flex -translate-y-1/2 flex-col items-center justify-center select-none will-change-transform"
             >
               {/* Primary Upright "TJ VODKA" Display Wordmark */}
-              <div
-                style={{ opacity: 0 }}
-                className="hero-intro-word flex scale-x-[1.1] items-center justify-center gap-[0.18em] sm:gap-[0.22em] md:gap-[0.26em] whitespace-nowrap font-display text-[clamp(2.9rem,10.2vw,10.2rem)] uppercase leading-[0.86] tracking-[0.04em] text-[#F5F5F5] drop-shadow-[0_12px_32px_rgba(0,0,0,0.85)]"
-              >
-                <span>{SITE_CONTENT.hero.titleLeft}</span>
-                <span>{SITE_CONTENT.hero.titleRight}</span>
+              <div style={{ opacity: 0 }} className="hero-intro-word">
+                <div
+                  style={{ transform: "scaleX(1.1)" }}
+                  className="flex items-center justify-center gap-[0.18em] sm:gap-[0.22em] md:gap-[0.26em] whitespace-nowrap font-display text-[clamp(2.9rem,10.2vw,10.2rem)] uppercase leading-[0.88] tracking-[0.04em] text-[#F5F5F5] drop-shadow-[0_12px_32px_rgba(0,0,0,0.85)]"
+                >
+                  <span>{SITE_CONTENT.hero.titleLeft}</span>
+                  <span>{SITE_CONTENT.hero.titleRight}</span>
+                </div>
               </div>
 
               {/* Subtle Studio Horizon Reflection Line */}
@@ -386,18 +388,20 @@ export function HeroProductStage() {
                 className="my-0.5 h-[1px] w-[min(82vw,840px)] bg-gradient-to-r from-transparent via-[#BDBDBD]/50 to-transparent"
               />
 
-              {/* Mirror Effect Directly Under "TJ VODKA" */}
+              {/* Mirror Effect Directly Under "TJ VODKA" (Vertically Inverted Reflection) */}
               <div
                 ref={heroMirrorRef}
                 aria-hidden="true"
-                className="hero-mirror-reflection pointer-events-none -mt-0.5 sm:-mt-1 overflow-hidden select-none will-change-transform"
+                className="hero-mirror-reflection pointer-events-none -mt-1 sm:-mt-2 pb-1 select-none will-change-transform"
               >
-                <div
-                  style={{ opacity: 0 }}
-                  className="hero-intro-word flex scale-x-[1.1] scale-y-[-1] items-center justify-center gap-[0.18em] sm:gap-[0.22em] md:gap-[0.26em] whitespace-nowrap font-display text-[clamp(2.9rem,10.2vw,10.2rem)] uppercase leading-[0.86] tracking-[0.04em] text-[#BDBDBD]/95 blur-[0.5px]"
-                >
-                  <span>{SITE_CONTENT.hero.titleLeft}</span>
-                  <span>{SITE_CONTENT.hero.titleRight}</span>
+                <div style={{ opacity: 0 }} className="hero-intro-word">
+                  <div
+                    style={{ transform: "scaleX(1.1) scaleY(-1)" }}
+                    className="flex items-center justify-center gap-[0.18em] sm:gap-[0.22em] md:gap-[0.26em] whitespace-nowrap font-display text-[clamp(2.9rem,10.2vw,10.2rem)] uppercase leading-[0.88] tracking-[0.04em] text-[#BDBDBD]/95 blur-[0.4px]"
+                  >
+                    <span>{SITE_CONTENT.hero.titleLeft}</span>
+                    <span>{SITE_CONTENT.hero.titleRight}</span>
+                  </div>
                 </div>
               </div>
             </div>
