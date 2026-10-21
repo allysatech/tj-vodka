@@ -104,13 +104,14 @@ export const MEDIA_SLOTS: Record<MediaSlotId, MediaAssetConfig> = {
     placement: "Page 1 · Section 03 Our Story Background",
     type: "image",
     src: "/media/bw/m03-story-bg-image2-bw.jpg",
+    mobileSrc: "/media/bw/m03-story-bg-mobile-bw.jpg",
     originalMasterSrc: "/media/originals/m03-story-bg-image2.jpg",
     alt: "TJ Vodka monochrome background featuring three signature bottles, founder signature, and the slogan Smoother than your average",
     fit: "cover",
     focalPoint: {
       desktop: "65% 50%",
       tablet: "62% 50%",
-      mobile: "65% 50%",
+      mobile: "50% 50%",
     },
     dimensions: {
       width: 1024,
@@ -118,7 +119,7 @@ export const MEDIA_SLOTS: Record<MediaSlotId, MediaAssetConfig> = {
     },
     allowVideoReplacement: false,
     statusNote:
-      "Clean Image 2 monochrome background with three bottles and signature on the right and open textured space on the left for Our Story copy.",
+      "Clean Image 2 monochrome background with three bottles and signature on the right (desktop) and 9:16 portrait layout (mobile).",
   },
   M04: {
     slotId: "M04",
