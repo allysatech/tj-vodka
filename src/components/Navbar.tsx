@@ -349,22 +349,12 @@ export function Navbar() {
                       href={item.href}
                       onClick={(e) => handleNavClick(e, item.sectionId)}
                       className={`group flex items-center justify-between py-4 font-sans text-sm uppercase tracking-[0.2em] transition-colors duration-200 ${
-                        isBuyNow
-                          ? "font-semibold text-[#F5F5F5] hover:text-[#BDBDBD]"
-                          : isActive
+                        isActive
                           ? "text-[#F5F5F5]"
                           : "text-[#BDBDBD] hover:text-[#F5F5F5]"
                       }`}
                     >
                       <span>{item.label}</span>
-                      {isBuyNow && (
-                        <span
-                          aria-hidden="true"
-                          className="border border-[#F5F5F5]/60 px-2.5 py-0.5 text-[10px] tracking-[0.18em] text-[#F5F5F5] transition-colors group-hover:bg-[#F5F5F5] group-hover:text-[#080808]"
-                        >
-                          70CL
-                        </span>
-                      )}
                     </Link>
                   </li>
                 );

@@ -503,26 +503,36 @@ export function HeroProductStage() {
         aria-label="The Vodka — Product Explorer"
         className="relative z-20 overflow-hidden scroll-mt-20 border-b border-[#BDBDBD]/15 bg-[#050505] py-20 md:py-28 lg:py-36"
       >
-        {/* Background Image 2 ("SMOOTHER THAN YOUR AVERAGE" warped monochrome artwork) at 50% opacity */}
+        {/* Responsive Background ("SMOOTHER THAN YOUR AVERAGE" warped monochrome artwork) at 50% opacity */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 flex items-center justify-start overflow-hidden"
+          className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
         >
+          {/* Phone / Mobile Viewport (< 768px): Portrait 9:16 artwork behind top bottle */}
+          <img
+            src="/media/bw/m04-vodka-bg-smoother-mobile-bw.jpg"
+            alt=""
+            style={{ opacity: 0.5 }}
+            className="bw-enforced-media block h-full w-full object-cover object-top select-none md:hidden"
+          />
+
+          {/* Desktop / Tablet Viewport (>= 768px): Wide 16:6 artwork behind left bottle */}
           <img
             src="/media/bw/m04-vodka-bg-smoother-bw.jpg"
             alt=""
             style={{ opacity: 0.5 }}
-            className="bw-enforced-media h-full w-full object-cover object-left select-none"
+            className="bw-enforced-media hidden h-full w-full object-cover object-left select-none md:block"
           />
-          {/* Subtle top/bottom edge blend & right-side readability vignette */}
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,#050505_0%,transparent_12%,transparent_88%,#050505_100%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,transparent_46%,rgba(5,5,5,0.82)_66%,#050505_100%)]" />
+
+          {/* Subtle edge blends for phone (top-to-bottom readability) and desktop (left-to-right readability) */}
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,#050505_0%,transparent_8%,transparent_48%,rgba(5,5,5,0.86)_66%,#050505_100%)] md:bg-[linear-gradient(180deg,#050505_0%,transparent_12%,transparent_88%,#050505_100%)]" />
+          <div className="hidden md:block absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,transparent_46%,rgba(5,5,5,0.82)_66%,#050505_100%)]" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-12">
-          <div className="grid grid-cols-1 items-center gap-10 min-[540px]:grid-cols-12 min-[540px]:gap-8 md:gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-12 md:gap-12 lg:gap-16">
             {/* Left Column: Bottle Showcase Slot (M04 target for descending M01 bottle) */}
-            <div className="relative flex flex-col items-center justify-center min-[540px]:col-span-5 lg:col-span-6">
+            <div className="relative flex flex-col items-center justify-center md:col-span-5 lg:col-span-6">
               {/* Vertical side label inspired by HWAYO reference */}
               <span
                 aria-hidden="true"
@@ -562,7 +572,7 @@ export function HeroProductStage() {
             {/* Right Column: HWAYO-Inspired Heading, 3 Information Tabs, Specs & Shop CTA */}
             <div
               ref={productCopyColRef}
-              className="flex flex-col min-[540px]:col-span-7 lg:col-span-6 will-change-transform"
+              className="flex flex-col md:col-span-7 lg:col-span-6 will-change-transform"
             >
               <span className="font-sans text-[10px] uppercase tracking-[0.26em] text-[#A8A8A8]">
                 {SITE_CONTENT.productExplorer.eyebrow}
