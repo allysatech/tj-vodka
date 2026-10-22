@@ -6,11 +6,18 @@ import { Navbar, dispatchCartUpdate } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { MonochromeMedia } from "@/components/MonochromeMedia";
 import {
+  FLAVOURS,
   MEDIA_SLOTS,
-  SHOP_GALLERY_ITEMS,
   SITE_CONTENT,
+  type FlavourId,
 } from "@/config/siteContent";
 import type { LiveShopifyProductData } from "@/app/api/shopify-product/route";
+
+function readFlavourFromSearch(): FlavourId {
+  if (typeof window === "undefined") return "original";
+  const value = new URLSearchParams(window.location.search).get("flavour");
+  return value === "vanilla" ? "vanilla" : "original";
+}
 
 export default function ProductShopPage() {
   if (typeof document !== "undefined") {
@@ -18,20 +25,38 @@ export default function ProductShopPage() {
       .querySelectorAll("[data-cursor-ref]")
       .forEach((el) => el.removeAttribute("data-cursor-ref"));
   }
+  const [flavourId, setFlavourId] = useState<FlavourId>(readFlavourFromSearch);
+  const flavour = FLAVOURS[flavourId];
   const [selectedGalleryId, setSelectedGalleryId] = useState<string>(
-    SHOP_GALLERY_ITEMS[0].id
+    flavour.gallery[0].id
   );
   const [quantity, setQuantity] = useState<number>(1);
   const [liveData, setLiveData] = useState<LiveShopifyProductData | null>(null);
   const [loadingLive, setLoadingLive] = useState<boolean>(true);
   const [lightboxOpen, setLightboxOpen] = useState<boolean>(false);
 
+  const selectFlavour = (nextId: FlavourId) => {
+    setFlavourId(nextId);
+    setSelectedGalleryId(FLAVOURS[nextId].gallery[0].id);
+    setQuantity(1);
+    const url = new URL(window.location.href);
+    if (nextId === "vanilla") {
+      url.searchParams.set("flavour", "vanilla");
+    } else {
+      url.searchParams.delete("flavour");
+    }
+    window.history.replaceState(null, "", `${url.pathname}${url.search}`);
+  };
+
   useEffect(() => {
     let active = true;
     async function loadShopifyData() {
       try {
         setLoadingLive(true);
-        const res = await fetch("/api/shopify-product", { cache: "no-store" });
+        const res = await fetch(
+          `/api/shopify-product?handle=${encodeURIComponent(flavour.shopifyHandle)}`,
+          { cache: "no-store" }
+        );
         const json: LiveShopifyProductData = await res.json();
         if (active) {
           setLiveData(json);
@@ -42,15 +67,15 @@ export default function ProductShopPage() {
             connected: false,
             fetchedAt: new Date().toISOString(),
             id: null,
-            variantId: SITE_CONTENT.shopPage.shopifyVariantId,
-            title: "TJ Vodka",
-            description: SITE_CONTENT.shopPage.description,
+            variantId: flavour.shopifyVariantId || 0,
+            title: flavour.title,
+            description: flavour.description,
             priceCents: null,
             formattedPrice: null,
             currency: "GBP",
             available: null,
             storeUrl: SITE_CONTENT.shopPage.shopifyStoreDomain,
-            productUrl: SITE_CONTENT.brand.existingProductUrl,
+            productUrl: flavour.productUrl,
             cartPermalinkBase: `${SITE_CONTENT.shopPage.shopifyStoreDomain}/cart`,
           });
         }
@@ -64,7 +89,7 @@ export default function ProductShopPage() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [flavour.description, flavour.productUrl, flavour.shopifyHandle, flavour.shopifyVariantId, flavour.title]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -77,14 +102,17 @@ export default function ProductShopPage() {
   }, [lightboxOpen]);
 
   const currentGalleryItem =
-    SHOP_GALLERY_ITEMS.find((item) => item.id === selectedGalleryId) ||
-    SHOP_GALLERY_ITEMS[0];
+    flavour.gallery.find((item) => item.id === selectedGalleryId) ||
+    flavour.gallery[0];
 
   const variantId =
-    liveData?.variantId || SITE_CONTENT.shopPage.shopifyVariantId;
+    liveData?.variantId || flavour.shopifyVariantId || 0;
+  const canCheckout = Boolean(liveData?.connected && variantId);
 
   // Real Shopify checkout permalink for the selected quantity
-  const shopifyCheckoutUrl = `${SITE_CONTENT.shopPage.shopifyStoreDomain}/cart/${variantId}:${quantity}`;
+  const shopifyCheckoutUrl = canCheckout
+    ? `${SITE_CONTENT.shopPage.shopifyStoreDomain}/cart/${variantId}:${quantity}`
+    : flavour.productUrl;
 
   const decreaseQty = () => setQuantity((q) => Math.max(1, q - 1));
   const increaseQty = () => setQuantity((q) => Math.min(24, q + 1));
@@ -139,7 +167,7 @@ export default function ProductShopPage() {
                 aria-label="Product Gallery Angles"
                 className="mt-4 grid grid-cols-4 gap-3"
               >
-                {SHOP_GALLERY_ITEMS.map((item) => {
+                {flavour.gallery.map((item) => {
                   const isActive = item.id === selectedGalleryId;
                   return (
                     <button
@@ -176,16 +204,42 @@ export default function ProductShopPage() {
             {/* Right Column: Title, Live Price & Availability, Quantity, Real Shopify Cart/Checkout */}
             <div className="flex flex-col md:col-span-7 lg:col-span-6">
               <span className="font-sans text-[10px] uppercase tracking-[0.26em] text-[#A8A8A8]">
-                {SITE_CONTENT.shopPage.eyebrow}
+                {flavour.eyebrow}
               </span>
 
               <h1 className="mt-3 font-serif text-[clamp(2.75rem,5vw,4.5rem)] font-light leading-[1.02] tracking-[0.02em] text-[#F5F5F5]">
-                {liveData?.title || SITE_CONTENT.shopPage.title}
+                {liveData?.connected && liveData.title ? liveData.title : flavour.title}
               </h1>
 
               <p className="mt-2 font-spirit text-xl tracking-[0.03em] text-[#BDBDBD]">
-                {SITE_CONTENT.shopPage.subtitle}
+                {flavour.subtitle}
               </p>
+
+              <div
+                role="tablist"
+                aria-label="Choose flavour"
+                className="mt-6 inline-flex border border-[#BDBDBD]/30"
+              >
+                {(Object.keys(FLAVOURS) as FlavourId[]).map((id) => {
+                  const isActive = flavourId === id;
+                  return (
+                    <button
+                      key={id}
+                      type="button"
+                      role="tab"
+                      aria-selected={isActive}
+                      onClick={() => selectFlavour(id)}
+                      className={`px-5 py-2.5 font-sans text-[11px] uppercase tracking-[0.2em] transition-colors ${
+                        isActive
+                          ? "bg-[#F4F4F4] text-[#151515]"
+                          : "bg-transparent text-[#A8A8A8] hover:text-[#F5F5F5]"
+                      }`}
+                    >
+                      {FLAVOURS[id].flavourLabel}
+                    </button>
+                  );
+                })}
+              </div>
 
               {/* Live Price & Availability Status Block (from tjvodka.co.uk/products/tj-vodka.js) */}
               <div
@@ -245,7 +299,7 @@ export default function ProductShopPage() {
               {/* Approved Description */}
               <div className="mt-6">
                 <p className="font-sans text-sm md:text-base leading-[1.8] text-[#F5F5F5]/90">
-                  {SITE_CONTENT.shopPage.description}
+                  {flavour.description}
                 </p>
               </div>
 
@@ -255,6 +309,7 @@ export default function ProductShopPage() {
                 method="post"
                 onSubmit={(e) => {
                   e.preventDefault();
+                  if (!canCheckout) return;
                   try {
                     const current = parseInt(
                       window.localStorage.getItem("tj_vodka_cart_qty") || "0",
@@ -333,35 +388,42 @@ export default function ProductShopPage() {
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                   <button
                     type="submit"
-                    disabled={liveData?.connected === true && liveData.available === false}
+                    disabled={
+                      !canCheckout ||
+                      (liveData?.connected === true && liveData.available === false)
+                    }
                     className="flex-1 border border-[#F5F5F5] bg-[#F4F4F4] px-6 py-4 text-center font-sans text-xs font-medium uppercase tracking-[0.2em] text-[#151515] transition-colors duration-200 hover:bg-transparent hover:text-[#F5F5F5] disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {liveData?.connected && liveData.available === false
                       ? "Sold Out"
-                      : "Add to Shopify Cart"}
+                      : canCheckout
+                        ? "Add to Shopify Cart"
+                        : "Vanilla joining the official store"}
                   </button>
 
                   <a
                     href={shopifyCheckoutUrl}
                     className="flex-1 border border-[#BDBDBD]/60 bg-[#080808] px-6 py-4 text-center font-sans text-xs uppercase tracking-[0.2em] text-[#F5F5F5] transition-colors duration-200 hover:border-[#F5F5F5] hover:bg-[#F4F4F4] hover:text-[#151515]"
                   >
-                    Proceed to Shopify Checkout ↗
+                    {canCheckout
+                      ? "Proceed to Shopify Checkout ↗"
+                      : "View official store ↗"}
                   </a>
                 </div>
 
                 <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-[#BDBDBD]/15 pt-3 font-sans text-[11px] text-[#A8A8A8]">
                   <span>
-                    Connected to official store:{" "}
+                    {canCheckout ? "Connected to official store: " : "Official store listing: "}
                     <a
-                      href={SITE_CONTENT.brand.existingProductUrl}
+                      href={flavour.productUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#F5F5F5] underline underline-offset-4"
                     >
-                      tjvodka.co.uk/products/tj-vodka
+                      tjvodka.co.uk/products/{flavour.shopifyHandle}
                     </a>
                   </span>
-                  <span>Variant ID: {variantId}</span>
+                  {canCheckout && <span>Variant ID: {variantId}</span>}
                 </div>
               </form>
 
@@ -371,7 +433,7 @@ export default function ProductShopPage() {
                   Verified Product Specifications
                 </h2>
                 <dl className="mt-3 divide-y divide-[#BDBDBD]/15 border-y border-[#BDBDBD]/20">
-                  {SITE_CONTENT.shopPage.specifications.map((spec) => (
+                  {flavour.specifications.map((spec) => (
                     <div
                       key={spec.label}
                       className="flex items-baseline justify-between py-3.5 text-xs"
@@ -441,7 +503,7 @@ export default function ProductShopPage() {
           >
             <div className="mb-4 flex items-center justify-between border-b border-[#BDBDBD]/20 pb-3">
               <span className="font-sans text-[10px] uppercase tracking-[0.22em] text-[#F5F5F5]">
-                {currentGalleryItem.label} · M10 MONOCHROME PACKSHOT
+                {currentGalleryItem.label} · {flavour.title.toUpperCase()}
               </span>
               <button
                 type="button"

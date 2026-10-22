@@ -9,40 +9,76 @@ import { MEDIA_SLOTS } from "@/config/siteContent";
  * - Left & Right circular icon buttons centered below the gallery to smoothly switch images
  * - Buttery-smooth 60fps requestAnimationFrame 3D coverflow transition + smooth 3D hover lift/tilt
  * - Page number & page title removed, zero wording on cards, images unclickable for inspect
- * - Strict grayscale enforcement on all images
+ * - Original colour retained in this gallery only
  */
 
 const BASE_CARDS = [
   {
     id: "main-lounge",
-    src: MEDIA_SLOTS.M08.src, // #1 Main: Image 4 — Gentleman in armchair with TJ Vodka
+    src: MEDIA_SLOTS.M08.originalMasterSrc,
     alt: MEDIA_SLOTS.M08.alt,
     objectPosition: "62% 42%",
   },
   {
     id: "culture-sneakers",
-    src: MEDIA_SLOTS.M07.src, // #2: Image 3 — Bottle & streetwear sneakers
+    src: MEDIA_SLOTS.M07.originalMasterSrc,
     alt: MEDIA_SLOTS.M07.alt,
     objectPosition: "50% 52%",
   },
   {
     id: "venue-tiered-bar",
-    src: MEDIA_SLOTS.M09.src, // #3: Image 1 — Multi-tiered back-bar
+    src: MEDIA_SLOTS.M09.originalMasterSrc,
     alt: MEDIA_SLOTS.M09.alt,
     objectPosition: "50% 54%",
   },
   {
     id: "atmosphere-shelves",
-    src: MEDIA_SLOTS.M06.src, // #4: Image 2 — Backlit cubby bar shelves
+    src: MEDIA_SLOTS.M06.originalMasterSrc,
     alt: MEDIA_SLOTS.M06.alt,
     objectPosition: "42% 58%",
   },
+  {
+    id: "vanilla-serve",
+    src: MEDIA_SLOTS.M12.originalMasterSrc,
+    alt: MEDIA_SLOTS.M12.alt,
+    objectPosition: "50% 48%",
+  },
+  {
+    id: "mixology-splash",
+    src: MEDIA_SLOTS.M13.originalMasterSrc,
+    alt: MEDIA_SLOTS.M13.alt,
+    objectPosition: "50% 42%",
+  },
+  {
+    id: "couple-toast",
+    src: "/media/originals/m14-couple-toast.jpg",
+    alt: "Couple toasting martinis with a bottle of TJ Vodka at a candlelit table",
+    objectPosition: "50% 42%",
+  },
+  {
+    id: "alpine-terrace",
+    src: "/media/originals/m15-alpine-terrace.jpg",
+    alt: "TJ Vodka bottle and crystal tumbler on a snowy alpine terrace",
+    objectPosition: "50% 48%",
+  },
+  {
+    id: "snowboard-stand",
+    src: "/media/originals/m16-snowboard-stand.jpg",
+    alt: "TJ Vodka bottle in the snow with a snowboarder standing on the slope behind it",
+    objectPosition: "50% 55%",
+  },
+  {
+    id: "snowboard-jump",
+    src: "/media/originals/m17-snowboard-jump.jpg",
+    alt: "Snowboarder jumping over a TJ Vodka bottle in fresh powder",
+    objectPosition: "50% 48%",
+  },
 ];
 
-// 8-card circular ring (2x the 4 unique images) so all 5 visible 3D coverflow slots
-// (-2, -1, 0, +1, +2) glide seamlessly in either direction without any wrap jump
+// Circular ring (2x unique images) so visible 3D coverflow slots
+// glide seamlessly in either direction without any wrap jump
 const RING_CARDS = [...BASE_CARDS, ...BASE_CARDS];
-const TOTAL = RING_CARDS.length; // 8
+const TOTAL = RING_CARDS.length;
 
 function wrapDiff(diff: number, total: number): number {
   let d = ((diff % total) + total) % total;
@@ -292,7 +328,7 @@ export function WorldOfTjSection() {
                   alt={card.alt}
                   draggable={false}
                   style={{ objectPosition: card.objectPosition }}
-                  className="bw-enforced-media pointer-events-none h-full w-full select-none object-cover will-change-transform"
+                  className="world-color-media pointer-events-none h-full w-full select-none object-cover will-change-transform"
                 />
                 {/* Dynamic 3D depth shading on angled side cards */}
                 <div

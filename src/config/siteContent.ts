@@ -24,7 +24,12 @@ export type MediaSlotId =
   | "M07"
   | "M08"
   | "M09"
-  | "M10";
+  | "M10"
+  | "M11"
+  | "M12"
+  | "M13";
+
+export type FlavourId = "original" | "vanilla";
 
 export interface MediaAssetConfig {
   slotId: MediaSlotId;
@@ -278,6 +283,70 @@ export const MEDIA_SLOTS: Record<MediaSlotId, MediaAssetConfig> = {
     statusNote:
       "Clean >1600px tall monochrome packshot (reuses M01 cutout master) with additional monochrome gallery angles from existing Shopify store.",
   },
+  M11: {
+    slotId: "M11",
+    title: "TJ Vanilla Flavoured Vodka Packshot",
+    placement: "Page 2 · /products/tj-vodka?flavour=vanilla Primary Packshot",
+    type: "image",
+    src: "/media/bw/m11-vanilla-cutout.png",
+    originalMasterSrc: "/media/originals/m11-vanilla-packshot.jpg",
+    alt: "TJ Vanilla flavoured vodka 70cl bottle with paint-splatter label, vanilla blossom, and VANILLA wordmark",
+    fit: "contain",
+    focalPoint: {
+      desktop: "50% 50%",
+      tablet: "50% 50%",
+      mobile: "50% 50%",
+    },
+    dimensions: {
+      width: 1024,
+      height: 1024,
+    },
+    allowVideoReplacement: false,
+    statusNote:
+      "Studio packshot converted to a transparent grayscale cutout. Colour master retained in originals.",
+  },
+  M12: {
+    slotId: "M12",
+    title: "TJ Vanilla Espresso Martini Serve",
+    placement: "Page 2 · Vanilla gallery + Page 1 · The World of TJ",
+    type: "image",
+    src: "/media/bw/m12-vanilla-serve-bw.jpg",
+    originalMasterSrc: "/media/originals/m12-vanilla-serve.jpg",
+    alt: "TJ Vanilla bottle beside an espresso martini with coffee beans, vanilla pod, and orchid",
+    fit: "cover",
+    focalPoint: {
+      desktop: "50% 48%",
+      tablet: "50% 48%",
+      mobile: "50% 50%",
+    },
+    dimensions: {
+      width: 1024,
+      height: 1024,
+    },
+    allowVideoReplacement: false,
+    statusNote: "Editorial vanilla serve converted to neutral grayscale.",
+  },
+  M13: {
+    slotId: "M13",
+    title: "Mixology Splash — Original TJ Vodka",
+    placement: "Page 1 · The World of TJ + Original shop gallery",
+    type: "image",
+    src: "/media/bw/m13-mixology-splash-bw.jpg",
+    originalMasterSrc: "/media/originals/m13-mixology-splash.jpg",
+    alt: "Original TJ Vodka bottle suspended in a citrus and ice splash with a bartender reaching toward the serve",
+    fit: "cover",
+    focalPoint: {
+      desktop: "50% 42%",
+      tablet: "50% 42%",
+      mobile: "50% 40%",
+    },
+    dimensions: {
+      width: 1024,
+      height: 1024,
+    },
+    allowVideoReplacement: false,
+    statusNote: "Campaign mixology splash converted to neutral grayscale.",
+  },
 };
 
 export interface ProductGalleryItem {
@@ -317,7 +386,97 @@ export const SHOP_GALLERY_ITEMS: ProductGalleryItem[] = [
     alt: "TJ Vodka bottle alongside a chilled martini glass in monochrome",
     fit: "contain",
   },
+  {
+    id: "mixology-splash",
+    label: "Mixology",
+    src: "/media/bw/m13-mixology-splash-bw.jpg",
+    alt: "Original TJ Vodka bottle suspended in a citrus and ice splash",
+    fit: "cover",
+  },
 ];
+
+export const VANILLA_GALLERY_ITEMS: ProductGalleryItem[] = [
+  {
+    id: "vanilla-front",
+    label: "Front Bottle",
+    src: "/media/bw/m11-vanilla-cutout.png",
+    alt: "TJ Vanilla flavoured vodka 70cl front studio bottle packshot",
+    fit: "contain",
+  },
+  {
+    id: "vanilla-serve",
+    label: "Espresso Serve",
+    src: "/media/bw/m12-vanilla-serve-bw.jpg",
+    alt: "TJ Vanilla bottle beside an espresso martini with coffee beans and vanilla orchid",
+    fit: "cover",
+  },
+];
+
+export interface FlavourConfig {
+  id: FlavourId;
+  flavourLabel: string;
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  shopifyHandle: string;
+  shopifyVariantId: number | null;
+  shopifyProductId: number | null;
+  productUrl: string;
+  packshotSrc: string;
+  gallery: ProductGalleryItem[];
+  specifications: Array<{ label: string; value: string }>;
+}
+
+export const FLAVOURS: Record<FlavourId, FlavourConfig> = {
+  original: {
+    id: "original",
+    flavourLabel: "Original",
+    eyebrow: "SIGNATURE RELEASE · 70CL",
+    title: "TJ Vodka",
+    subtitle: "Smoother than your average.",
+    description:
+      "Indulge in the smooth and exquisite taste of TJ Vodka, the perfect ingredient for crafting delicious cocktails. Distilled in Italy from a refined blend of grains, filtered and diluted with pure mountain water from the Appennino.",
+    shopifyHandle: "tj-vodka",
+    shopifyVariantId: 44534023651623,
+    shopifyProductId: 8146885312807,
+    productUrl: "https://tjvodka.co.uk/products/tj-vodka",
+    packshotSrc: "/media/bw/m10-shop-packshot.png",
+    gallery: SHOP_GALLERY_ITEMS,
+    specifications: [
+      { label: "Volume", value: "70cl e" },
+      { label: "ABV", value: "37.5% vol. (Bottle Label — Confirm Before Launch)" },
+      { label: "Flavour", value: "Original · Unflavoured" },
+      { label: "Base", value: "Refined Blend of Grains & Appennino Mountain Water" },
+      { label: "Origin", value: "Made in Italy" },
+      { label: "Importer (UK)", value: "Kurvado Group Ltd., Leamington Spa, UK" },
+    ],
+  },
+  vanilla: {
+    id: "vanilla",
+    flavourLabel: "Vanilla",
+    eyebrow: "FLAVOURED VODKA · 70CL",
+    title: "TJ Vanilla",
+    subtitle: "Vanilla. Smoother than your average.",
+    description:
+      "TJ Vanilla is a flavoured vodka built on the same Italian grain foundation — finished with a refined vanilla character. Soft, composed, and ready for an espresso martini or a chilled neat pour.",
+    shopifyHandle: "tj-vodka-vanilla",
+    shopifyVariantId: null,
+    shopifyProductId: null,
+    productUrl: "https://tjvodka.co.uk/products/tj-vodka-vanilla",
+    packshotSrc: "/media/bw/m11-vanilla-cutout.png",
+    gallery: VANILLA_GALLERY_ITEMS,
+    specifications: [
+      { label: "Volume", value: "70cl e" },
+      { label: "ABV", value: "37.5% vol. (Confirm Before Launch)" },
+      { label: "Flavour", value: "Vanilla" },
+      { label: "Style", value: "Flavoured Vodka" },
+      { label: "Base", value: "Italian Grain Vodka & Natural Vanilla Character" },
+      { label: "Origin", value: "Made in Italy" },
+      { label: "Importer (UK)", value: "Kurvado Group Ltd., Leamington Spa, UK" },
+    ],
+  },
+};
 
 export const SITE_CONTENT = {
   brand: {
@@ -374,9 +533,9 @@ export const SITE_CONTENT = {
   },
   productExplorer: {
     sectionNumber: "02",
-    eyebrow: "ONE SIGNATURE BOTTLE",
+    eyebrow: "TWO SIGNATURE EXPRESSIONS",
     heading: "The Vodka",
-    subheading: "Pure monochrome presence. Uncomplicated character.",
+    subheading: "Original, and now Vanilla.",
     tabs: [
       {
         id: "overview",
@@ -480,6 +639,7 @@ export const SITE_CONTENT = {
     specifications: [
       { label: "Volume", value: "70cl e" },
       { label: "ABV", value: "37.5% vol. (Bottle Label — Confirm Before Launch)" },
+      { label: "Flavour", value: "Original · Unflavoured" },
       { label: "Base", value: "Refined Blend of Grains & Appennino Mountain Water" },
       { label: "Origin", value: "Made in Italy" },
       { label: "Importer (UK)", value: "Kurvado Group Ltd., Leamington Spa, UK" },

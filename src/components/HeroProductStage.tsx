@@ -678,8 +678,37 @@ export function HeroProductStage() {
                 ))}
               </dl>
 
-              {/* CTA to Page 2 (/products/tj-vodka) */}
-              <div className="mt-4 md:mt-5 flex flex-wrap items-center gap-4 md:gap-6">
+              {/* Flavour range + CTA */}
+              <div className="mt-4 md:mt-5 flex flex-wrap items-center gap-3">
+                <Link
+                  href="/products/tj-vodka"
+                  className="inline-flex items-center gap-2.5 border border-[#BDBDBD]/30 bg-[#080808]/50 px-3 py-1.5 transition-colors hover:border-[#F5F5F5]"
+                >
+                  <img
+                    src="/media/bw/m10-shop-packshot.png"
+                    alt=""
+                    className="bw-enforced-media h-8 w-4 object-contain"
+                  />
+                  <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-[#F5F5F5]">
+                    Original
+                  </span>
+                </Link>
+                <Link
+                  href="/products/tj-vodka?flavour=vanilla"
+                  className="inline-flex items-center gap-2.5 border border-[#BDBDBD]/30 bg-[#080808]/50 px-3 py-1.5 transition-colors hover:border-[#F5F5F5]"
+                >
+                  <img
+                    src="/media/bw/m11-vanilla-cutout.png"
+                    alt=""
+                    className="bw-enforced-media h-8 w-4 object-contain"
+                  />
+                  <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-[#F5F5F5]">
+                    Vanilla
+                  </span>
+                </Link>
+              </div>
+
+              <div className="mt-3.5 md:mt-4 flex flex-wrap items-center gap-4 md:gap-6">
                 <Link
                   href={SITE_CONTENT.productExplorer.cta.href}
                   className="inline-flex items-center justify-center border border-[#F5F5F5] bg-[#F4F4F4] px-6 py-2.5 md:px-7 md:py-3 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-[#151515] transition-colors duration-200 hover:bg-transparent hover:text-[#F5F5F5]"

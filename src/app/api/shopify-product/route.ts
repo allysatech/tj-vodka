@@ -24,10 +24,12 @@ export interface LiveShopifyProductData {
  * the existing TJ Vodka Shopify storefront (https://tjvodka.co.uk/products/tj-vodka.js).
  * Does not hardcode previously observed price or stock status when offline.
  */
-export async function GET() {
+export async function GET(request: Request) {
   const storeUrl = "https://tjvodka.co.uk";
-  const productUrl = `${storeUrl}/products/tj-vodka`;
-  const defaultVariantId = 44534023651623;
+  const requestedHandle = new URL(request.url).searchParams.get("handle") || "tj-vodka";
+  const handle = /^[a-z0-9-]+$/.test(requestedHandle) ? requestedHandle : "tj-vodka";
+  const productUrl = `${storeUrl}/products/${handle}`;
+  const defaultVariantId = handle === "tj-vodka" ? 44534023651623 : 0;
 
   try {
     const response = await fetch(`${productUrl}.js`, {

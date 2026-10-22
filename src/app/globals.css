@@ -108,6 +108,15 @@ video:active,
   -webkit-filter: grayscale(100%) !important;
 }
 
+/* The World of TJ gallery is allowed to keep original colour */
+#world img.world-color-media,
+#world img.world-color-media:hover,
+#world img.world-color-media:focus,
+#world img.world-color-media:active {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+
 /* Highlighted bottle cutout filter (strictly 100% grayscale + studio silver rim & deep shadow) */
 img.bottle-highlight-filter,
 img.bottle-highlight-filter:hover,
