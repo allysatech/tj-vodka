@@ -26,56 +26,19 @@ export default function ContactUtilityPage() {
             </span>
           </div>
 
-          <h1 className="font-serif text-4xl md:text-5xl font-light text-[#F5F5F5]">
-            Contact TJ Vodka
-          </h1>
-          <p className="mt-3 font-sans text-sm leading-relaxed text-[#A8A8A8]">
+          <p className="font-sans text-sm leading-relaxed text-[#A8A8A8]">
             For customer orders, returns, or UK trade and hospitality enquiries,
             reach out directly via email or through our official Shopify contact
             channel.
           </p>
 
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <div className="border border-[#BDBDBD]/20 bg-[#141414] p-6">
-              <span className="font-sans text-[10px] uppercase tracking-[0.22em] text-[#A8A8A8]">
-                Direct Email
-              </span>
-              <a
-                href={`mailto:${SITE_CONTENT.brand.contactEmail}`}
-                className="mt-2 block font-serif text-2xl text-[#F5F5F5] underline underline-offset-4"
-              >
-                {SITE_CONTENT.brand.contactEmail}
-              </a>
-              <p className="mt-2 font-sans text-xs text-[#A8A8A8]">
-                Customer support, returns &amp; trade enquiries.
-              </p>
-            </div>
-
-            <div className="border border-[#BDBDBD]/20 bg-[#141414] p-6">
-              <span className="font-sans text-[10px] uppercase tracking-[0.22em] text-[#A8A8A8]">
-                Instagram
-              </span>
-              <a
-                href={SITE_CONTENT.brand.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 block font-serif text-2xl text-[#F5F5F5] underline underline-offset-4"
-              >
-                {SITE_CONTENT.brand.instagramHandle} ↗
-              </a>
-              <p className="mt-2 font-sans text-xs text-[#A8A8A8]">
-                Official brand updates and editorial archive.
-              </p>
-            </div>
-          </div>
-
-          <section className="mt-16" aria-labelledby="contact-form-title">
-            <h2
+          <section className="mt-8" aria-labelledby="contact-form-title">
+            <h1
               id="contact-form-title"
               className="font-serif text-5xl font-light text-[#F5F5F5] md:text-6xl"
             >
               Contact
-            </h2>
+            </h1>
             <form
               action="https://tjvodka.co.uk/contact#contact_form"
               method="post"
@@ -233,6 +196,40 @@ export default function ContactUtilityPage() {
               </li>
             </ul>
           </section>
+
+          <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="border border-[#BDBDBD]/20 bg-[#141414] p-6">
+              <span className="font-sans text-[10px] uppercase tracking-[0.22em] text-[#A8A8A8]">
+                Direct Email
+              </span>
+              <a
+                href={`mailto:${SITE_CONTENT.brand.contactEmail}`}
+                className="mt-2 block font-serif text-2xl text-[#F5F5F5] underline underline-offset-4"
+              >
+                {SITE_CONTENT.brand.contactEmail}
+              </a>
+              <p className="mt-2 font-sans text-xs text-[#A8A8A8]">
+                Customer support, returns &amp; trade enquiries.
+              </p>
+            </div>
+
+            <div className="border border-[#BDBDBD]/20 bg-[#141414] p-6">
+              <span className="font-sans text-[10px] uppercase tracking-[0.22em] text-[#A8A8A8]">
+                Instagram
+              </span>
+              <a
+                href={SITE_CONTENT.brand.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 block font-serif text-2xl text-[#F5F5F5] underline underline-offset-4"
+              >
+                {SITE_CONTENT.brand.instagramHandle} ↗
+              </a>
+              <p className="mt-2 font-sans text-xs text-[#A8A8A8]">
+                Official brand updates and editorial archive.
+              </p>
+            </div>
+          </div>
         </div>
       </main>
       <Footer compact />
