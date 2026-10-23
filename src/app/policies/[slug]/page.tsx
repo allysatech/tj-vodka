@@ -3,86 +3,44 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import {
+  LEGAL_POLICIES,
+  type PolicyInline,
+} from "@/config/legalPolicies";
 
-const POLICIES: Record<
-  string,
-  {
-    title: string;
-    updated?: string;
-    sections: { heading?: string; paragraphs: string[] }[];
-  }
-> = {
-  "refund-policy": {
-    title: "Refund Policy",
-    sections: [
-      {
-        paragraphs: [
-          "We have a 30-day return policy, which means you have 30 days after receiving your item to request a return.",
-          "To be eligible for a return, your item must be in the same condition that you received it, unopened and unused, with original seals intact, and in its original packaging. You’ll also need the receipt or proof of purchase.",
-          "To start a return, you can contact us at sales@tjvodka.co.uk. If your return is accepted, we’ll send you a return shipping label, as well as instructions on how and where to send your package. Items sent back to us without first requesting a return will not be accepted.",
-        ],
-      },
-      {
-        heading: "Damages and Issues",
-        paragraphs: [
-          "Please inspect your order upon reception and contact us immediately at sales@tjvodka.co.uk if the item is defective, damaged or if you receive the wrong item, so that we can evaluate the issue and make it right.",
-        ],
-      },
-      {
-        heading: "Refunds",
-        paragraphs: [
-          "We will notify you once we’ve received and inspected your return, and let you know if the refund was approved or not. If approved, you’ll be automatically refunded on your original payment method within 10 business days. Please remember it can take some time for your bank or credit card company to process and post the refund too.",
-        ],
-      },
-    ],
-  },
-  "privacy-policy": {
-    title: "Privacy Policy",
-    updated: "Last updated: October 6, 2025",
-    sections: [
-      {
-        paragraphs: [
-          'This Privacy Policy describes how TJ Vodka (the "Site", "we", "us", or "our") collects, uses, and discloses your personal information when you visit, use our services, or make a purchase from tjvodka.co.uk (the "Site") or otherwise communicate with us regarding the Site (collectively, the "Services").',
-        ],
-      },
-      {
-        heading: "Personal Information We Collect",
-        paragraphs: [
-          "When you visit the Site or place an order through our Shopify checkout, we collect information necessary to fulfil your order, verify legal purchasing age, process payment securely, and arrange delivery — including your name, billing address, shipping address, payment confirmation, email address, and phone number.",
-        ],
-      },
-      {
-        heading: "Contact Us",
-        paragraphs: [
-          "Should you have any questions about our privacy practices or this Privacy Policy, please contact us by email at sales@tjvodka.co.uk or via our official Shopify store at https://tjvodka.co.uk/policies/privacy-policy.",
-        ],
-      },
-    ],
-  },
-  "terms-of-service": {
-    title: "Terms of Service",
-    sections: [
-      {
-        heading: "Overview",
-        paragraphs: [
-          "This website is operated by TJ Vodka. Throughout the site, the terms “we”, “us” and “our” refer to TJ Vodka. TJ Vodka offers this website, including all information, tools and Services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.",
-        ],
-      },
-      {
-        heading: "Age Restriction (18+)",
-        paragraphs: [
-          "By placing an order for TJ Vodka, you confirm that you are of legal drinking age (18 years or older in the United Kingdom) to purchase alcohol. All orders and payments are processed through our official Shopify storefront (tjvodka.co.uk).",
-        ],
-      },
-      {
-        heading: "Company & Importer Information",
-        paragraphs: [
-          "TJ Vodka (70cl · 37.5% vol.) is Made in Italy and imported in the UK for Kurvado Group Ltd., 26 Adelaide Road, Leamington Spa, UK, CV31 3PL. Enquiries: sales@tjvodka.co.uk.",
-        ],
-      },
-    ],
-  },
-};
+function PolicyText({ parts }: { parts: PolicyInline[] }) {
+  return (
+    <>
+      {parts.map((part, index) => {
+        if (typeof part === "string") {
+          return <React.Fragment key={index}>{part}</React.Fragment>;
+        }
+        if (part.external) {
+          return (
+            <a
+              key={index}
+              href={part.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#F5F5F5] underline underline-offset-4"
+            >
+              {part.text}
+            </a>
+          );
+        }
+        return (
+          <Link
+            key={index}
+            href={part.href}
+            className="text-[#F5F5F5] underline underline-offset-4"
+          >
+            {part.text}
+          </Link>
+        );
+      })}
+    </>
+  );
+}
 
 export default async function PolicyUtilityPage({
   params,
@@ -90,7 +48,7 @@ export default async function PolicyUtilityPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const policy = POLICIES[slug];
+  const policy = LEGAL_POLICIES[slug];
 
   if (!policy) {
     notFound();
@@ -130,14 +88,47 @@ export default async function PolicyUtilityPage({
                     {sec.heading}
                   </h2>
                 )}
-                {sec.paragraphs.map((p, j) => (
-                  <p
-                    key={j}
-                    className="font-sans text-sm leading-[1.85] text-[#F5F5F5]/85"
-                  >
-                    {p}
-                  </p>
-                ))}
+                {sec.blocks.map((block, j) =>
+                  block.type === "table" ? (
+                    <div key={j} className="overflow-x-auto border border-[#BDBDBD]/20">
+                      <table className="w-full min-w-[36rem] border-collapse text-left font-sans text-xs leading-relaxed text-[#F5F5F5]/85">
+                        <thead className="bg-[#141414] text-[#A8A8A8]">
+                          <tr>
+                            {block.headers.map((header) => (
+                              <th
+                                key={header}
+                                className="border-b border-[#BDBDBD]/20 px-4 py-3 font-medium uppercase tracking-[0.12em]"
+                              >
+                                {header}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {block.rows.map((row) => (
+                            <tr key={row[0]} className="align-top">
+                              {row.map((cell) => (
+                                <td
+                                  key={cell}
+                                  className="border-b border-[#BDBDBD]/15 px-4 py-3"
+                                >
+                                  {cell}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  ) : (
+                    <p
+                      key={j}
+                      className="font-sans text-sm leading-[1.85] text-[#F5F5F5]/85"
+                    >
+                      <PolicyText parts={block.parts} />
+                    </p>
+                  )
+                )}
               </div>
             ))}
           </div>

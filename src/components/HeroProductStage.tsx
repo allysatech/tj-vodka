@@ -450,9 +450,11 @@ export function HeroProductStage() {
             {/* Slogan in Jost Medium */}
             <h1
               style={{ opacity: 0 }}
-              className="hero-intro-copy font-spirit text-[clamp(1.5rem,2.6vw,2.5rem)] font-medium leading-[1.1] tracking-[0.04em] bg-gradient-to-r from-[#BDBDBD] via-[#F5F5F5] to-[#BDBDBD] bg-clip-text text-transparent drop-shadow-[0_4px_18px_rgba(0,0,0,0.8)]"
+              className="hero-intro-copy font-spirit text-[clamp(1.5rem,2.6vw,2.5rem)] font-medium uppercase leading-[1.1] tracking-[0.04em] drop-shadow-[0_4px_18px_rgba(0,0,0,0.8)]"
             >
-              {SITE_CONTENT.hero.slogan}
+              <span className="text-[#FAF4E7]">Smoother than </span>
+              <span className="text-[#FBBD4E]">your </span>
+              <span className="text-[#D01B23]">average.</span>
             </h1>
 
             <p
@@ -685,9 +687,9 @@ export function HeroProductStage() {
                   className="inline-flex items-center gap-2.5 border border-[#BDBDBD]/30 bg-[#080808]/50 px-3 py-1.5 transition-colors hover:border-[#F5F5F5]"
                 >
                   <img
-                    src="/media/bw/m10-shop-packshot.png"
+                    src="/media/originals/m10-original-studio.jpg"
                     alt=""
-                    className="bw-enforced-media h-8 w-4 object-contain"
+                    className="bw-enforced-media h-8 w-4 object-cover object-center"
                   />
                   <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-[#F5F5F5]">
                     Original
@@ -698,9 +700,9 @@ export function HeroProductStage() {
                   className="inline-flex items-center gap-2.5 border border-[#BDBDBD]/30 bg-[#080808]/50 px-3 py-1.5 transition-colors hover:border-[#F5F5F5]"
                 >
                   <img
-                    src="/media/bw/m11-vanilla-cutout.png"
+                    src="/media/originals/m11-vanilla-studio.jpg"
                     alt=""
-                    className="bw-enforced-media h-8 w-4 object-contain"
+                    className="product-color-media h-8 w-4 object-cover object-center"
                   />
                   <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-[#F5F5F5]">
                     Vanilla

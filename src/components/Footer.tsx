@@ -42,8 +42,10 @@ export function Footer({ compact = false }: FooterProps) {
               </div>
             </Link>
 
-            <p className="mt-5 font-spirit text-xl tracking-[0.03em] text-[#F5F5F5]">
-              {SITE_CONTENT.footer.brandLine}
+            <p className="mt-5 font-spirit text-xl uppercase tracking-[0.03em]">
+              <span className="text-[#FAF4E7]">Smoother than </span>
+              <span className="text-[#FBBD4E]">your </span>
+              <span className="text-[#D01B23]">average.</span>
             </p>
 
             <p className="mt-2 max-w-sm font-sans text-xs leading-relaxed text-[#A8A8A8]">

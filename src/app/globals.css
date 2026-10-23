@@ -20,6 +20,9 @@
   --text-on-light: #151515;
   --text-secondary: #A8A8A8;
   --border-silver: #BDBDBD;
+  --tj-cream: #FAF4E7;
+  --tj-gold: #FBBD4E;
+  --tj-hibiscus: #D01B23;
   --font-jost: "Jost", sans-serif;
 }
 
@@ -108,11 +111,17 @@ video:active,
   -webkit-filter: grayscale(100%) !important;
 }
 
-/* The World of TJ gallery is allowed to keep original colour */
+/* The World of TJ gallery + Vanilla product bottle keep original colour */
 #world img.world-color-media,
 #world img.world-color-media:hover,
 #world img.world-color-media:focus,
-#world img.world-color-media:active {
+#world img.world-color-media:active,
+img.product-color-media,
+img.product-color-media:hover,
+img.product-color-media:focus,
+img.product-color-media:active,
+.group:hover img.product-color-media,
+.group:focus-within img.product-color-media {
   filter: none !important;
   -webkit-filter: none !important;
 }

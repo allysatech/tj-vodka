@@ -1,31 +1,46 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Navbar, dispatchCartUpdate } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { MonochromeMedia } from "@/components/MonochromeMedia";
 import {
   FLAVOURS,
-  MEDIA_SLOTS,
   SITE_CONTENT,
   type FlavourId,
 } from "@/config/siteContent";
 import type { LiveShopifyProductData } from "@/app/api/shopify-product/route";
 
-function readFlavourFromSearch(): FlavourId {
-  if (typeof window === "undefined") return "original";
-  const value = new URLSearchParams(window.location.search).get("flavour");
+function flavourFromParam(value: string | null): FlavourId {
   return value === "vanilla" ? "vanilla" : "original";
 }
 
 export default function ProductShopPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center bg-[#0a0a0a] text-white/40">
+          Loading…
+        </div>
+      }
+    >
+      <ProductShopPageInner />
+    </Suspense>
+  );
+}
+
+function ProductShopPageInner() {
   if (typeof document !== "undefined") {
     document
       .querySelectorAll("[data-cursor-ref]")
       .forEach((el) => el.removeAttribute("data-cursor-ref"));
   }
-  const [flavourId, setFlavourId] = useState<FlavourId>(readFlavourFromSearch);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const flavourFromUrl = flavourFromParam(searchParams.get("flavour"));
+  const [flavourId, setFlavourId] = useState<FlavourId>(flavourFromUrl);
   const flavour = FLAVOURS[flavourId];
   const [selectedGalleryId, setSelectedGalleryId] = useState<string>(
     flavour.gallery[0].id
@@ -33,25 +48,32 @@ export default function ProductShopPage() {
   const [quantity, setQuantity] = useState<number>(1);
   const [liveData, setLiveData] = useState<LiveShopifyProductData | null>(null);
   const [loadingLive, setLoadingLive] = useState<boolean>(true);
-  const [lightboxOpen, setLightboxOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    setFlavourId(flavourFromUrl);
+    setSelectedGalleryId(FLAVOURS[flavourFromUrl].gallery[0].id);
+    setQuantity(1);
+  }, [flavourFromUrl]);
 
   const selectFlavour = (nextId: FlavourId) => {
     setFlavourId(nextId);
     setSelectedGalleryId(FLAVOURS[nextId].gallery[0].id);
     setQuantity(1);
-    const url = new URL(window.location.href);
+    const params = new URLSearchParams(searchParams.toString());
     if (nextId === "vanilla") {
-      url.searchParams.set("flavour", "vanilla");
+      params.set("flavour", "vanilla");
     } else {
-      url.searchParams.delete("flavour");
+      params.delete("flavour");
     }
-    window.history.replaceState(null, "", `${url.pathname}${url.search}`);
+    const query = params.toString();
+    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
   };
 
   useEffect(() => {
     let active = true;
     async function loadShopifyData() {
       try {
+        setLiveData(null);
         setLoadingLive(true);
         const res = await fetch(
           `/api/shopify-product?handle=${encodeURIComponent(flavour.shopifyHandle)}`,
@@ -91,16 +113,6 @@ export default function ProductShopPage() {
     };
   }, [flavour.description, flavour.productUrl, flavour.shopifyHandle, flavour.shopifyVariantId, flavour.title]);
 
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && lightboxOpen) {
-        setLightboxOpen(false);
-      }
-    };
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  }, [lightboxOpen]);
-
   const currentGalleryItem =
     flavour.gallery.find((item) => item.id === selectedGalleryId) ||
     flavour.gallery[0];
@@ -134,71 +146,63 @@ export default function ProductShopPage() {
             </Link>
           </div>
 
-          {/* Primary Product Split: Large Clean Bottle Left, Purchasing & Specs Right */}
+          {/* Primary Product Split: gallery sticks on the left while the buy column scrolls */}
           <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-12 md:gap-10 lg:gap-16">
-            {/* Left Column: Media M10 Clean Shop Packshot + Monochrome Thumbnails */}
-            <div className="flex flex-col md:col-span-5 lg:col-span-6">
+            <div className="flex flex-col md:sticky md:top-24 md:w-[min(100%,calc((100svh-17rem)*1301/2048))] md:col-span-5 md:self-start lg:col-span-6">
               <div
-                data-media-slot="M10"
-                className="relative flex h-[440px] sm:h-[520px] md:h-[560px] w-full items-center justify-center overflow-hidden border border-[#BDBDBD]/20 bg-[radial-gradient(ellipse_at_center,#222222_0%,#141414_55%,#080808_100%)] p-6 sm:p-10"
+                data-media-slot={flavourId === "vanilla" ? "M11" : "M10"}
+                className="relative aspect-[1301/2048] w-full overflow-hidden bg-[#080808]"
               >
-                <button
-                  type="button"
-                  onClick={() => setLightboxOpen(true)}
-                  aria-label={`Inspect ${currentGalleryItem.alt} in monochrome modal`}
-                  className="group relative flex h-full w-full items-center justify-center overflow-hidden focus:outline-none"
-                >
-                  <img
-                    src={currentGalleryItem.src}
-                    alt={currentGalleryItem.alt}
-                    width={MEDIA_SLOTS.M10.dimensions.width}
-                    height={MEDIA_SLOTS.M10.dimensions.height}
-                    className="bw-enforced-media h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.02] drop-shadow-[0_24px_45px_rgba(0,0,0,0.9)]"
-                  />
-                  <span className="pointer-events-none absolute bottom-0 right-0 bg-[#080808]/80 px-3 py-1.5 font-sans text-[9px] uppercase tracking-[0.2em] text-[#A8A8A8] border border-[#BDBDBD]/20">
-                    Click to Enlarge
-                  </span>
-                </button>
+                <img
+                  src={currentGalleryItem.src}
+                  alt={currentGalleryItem.alt}
+                  width={flavourId === "vanilla" ? 650 : 1301}
+                  height={flavourId === "vanilla" ? 1024 : 2048}
+                  className={`${
+                    flavourId === "vanilla"
+                      ? "product-color-media"
+                      : "bw-enforced-media"
+                  } h-full w-full object-cover object-center`}
+                />
               </div>
 
-              {/* Monochrome Gallery Angle Selector */}
-              <div
-                role="group"
-                aria-label="Product Gallery Angles"
-                className="mt-4 grid grid-cols-4 gap-3"
-              >
-                {flavour.gallery.map((item) => {
-                  const isActive = item.id === selectedGalleryId;
-                  return (
-                    <button
-                      key={item.id}
-                      type="button"
-                      onClick={() => setSelectedGalleryId(item.id)}
-                      aria-pressed={isActive}
-                      className={`group flex flex-col items-center border bg-[#141414] p-2 transition-colors ${
-                        isActive
-                          ? "border-[#F5F5F5]"
-                          : "border-[#BDBDBD]/20 hover:border-[#BDBDBD]/60"
-                      }`}
-                    >
-                      <div className="flex h-20 w-full items-center justify-center overflow-hidden bg-[#080808] p-1">
-                        <img
-                          src={item.src}
-                          alt={item.alt}
-                          className="bw-enforced-media h-full w-auto object-contain"
-                        />
-                      </div>
-                      <span
-                        className={`mt-2 font-sans text-[9px] uppercase tracking-[0.16em] ${
-                          isActive ? "text-[#F5F5F5]" : "text-[#A8A8A8]"
+              {flavour.gallery.length > 1 && (
+                <div
+                  role="group"
+                  aria-label="Product photos"
+                  className={`mt-4 grid gap-3 ${
+                    flavour.gallery.length === 3 ? "grid-cols-3" : "grid-cols-4"
+                  }`}
+                >
+                  {flavour.gallery.map((item) => {
+                    const isActive = item.id === selectedGalleryId;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => setSelectedGalleryId(item.id)}
+                        aria-pressed={isActive}
+                        aria-label={item.alt}
+                        className={`overflow-hidden border-2 bg-[#080808] p-0 transition-colors ${
+                          isActive
+                            ? "border-[#F5F5F5]"
+                            : "border-transparent hover:border-[#BDBDBD]/50"
                         }`}
                       >
-                        {item.label}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
+                        <img
+                          src={item.src}
+                          alt=""
+                          className={`${
+                            flavourId === "vanilla"
+                              ? "product-color-media"
+                              : "bw-enforced-media"
+                          } aspect-square w-full object-contain object-center`}
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             {/* Right Column: Title, Live Price & Availability, Quantity, Real Shopify Cart/Checkout */}
@@ -208,7 +212,7 @@ export default function ProductShopPage() {
               </span>
 
               <h1 className="mt-3 font-serif text-[clamp(2.75rem,5vw,4.5rem)] font-light leading-[1.02] tracking-[0.02em] text-[#F5F5F5]">
-                {liveData?.connected && liveData.title ? liveData.title : flavour.title}
+                {flavour.title}
               </h1>
 
               <p className="mt-2 font-spirit text-xl tracking-[0.03em] text-[#BDBDBD]">
@@ -394,11 +398,15 @@ export default function ProductShopPage() {
                     }
                     className="flex-1 border border-[#F5F5F5] bg-[#F4F4F4] px-6 py-4 text-center font-sans text-xs font-medium uppercase tracking-[0.2em] text-[#151515] transition-colors duration-200 hover:bg-transparent hover:text-[#F5F5F5] disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    {liveData?.connected && liveData.available === false
-                      ? "Sold Out"
-                      : canCheckout
-                        ? "Add to Shopify Cart"
-                        : "Vanilla joining the official store"}
+                    {loadingLive
+                      ? "Checking live store…"
+                      : liveData?.connected && liveData.available === false
+                        ? "Sold Out"
+                        : canCheckout
+                          ? "Add to Shopify Cart"
+                          : flavourId === "vanilla"
+                            ? "Vanilla joining the official store"
+                            : "See official store"}
                   </button>
 
                   <a
@@ -487,42 +495,6 @@ export default function ProductShopPage() {
           </div>
         </div>
       </main>
-
-      {/* Monochrome Lightbox Modal for Product Packshots */}
-      {lightboxOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="Product Packshot Lightbox"
-          className="fixed inset-0 z-[80] flex items-center justify-center bg-[#080808]/95 p-6 backdrop-blur-md"
-          onClick={() => setLightboxOpen(false)}
-        >
-          <div
-            className="relative flex max-h-[90vh] w-full max-w-3xl flex-col border border-[#BDBDBD]/30 bg-[#141414] p-6"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="mb-4 flex items-center justify-between border-b border-[#BDBDBD]/20 pb-3">
-              <span className="font-sans text-[10px] uppercase tracking-[0.22em] text-[#F5F5F5]">
-                {currentGalleryItem.label} · {flavour.title.toUpperCase()}
-              </span>
-              <button
-                type="button"
-                onClick={() => setLightboxOpen(false)}
-                className="border border-[#BDBDBD]/40 px-3 py-1 font-sans text-[10px] uppercase tracking-[0.18em] text-[#F5F5F5]"
-              >
-                Close [ESC]
-              </button>
-            </div>
-            <div className="flex max-h-[72vh] items-center justify-center overflow-hidden bg-[#080808] p-6">
-              <img
-                src={currentGalleryItem.src}
-                alt={currentGalleryItem.alt}
-                className="bw-enforced-media max-h-[66vh] w-auto object-contain"
-              />
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Shared Compact Footer */}
       <Footer compact />
