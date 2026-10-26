@@ -513,25 +513,25 @@ export function HeroProductStage() {
         aria-label="The Vodka — Product Explorer"
         className="relative z-20 flex min-h-[calc(100svh-4rem)] w-full flex-col justify-center overflow-hidden scroll-mt-16 border-b border-[#BDBDBD]/15 bg-[#050505] py-5 sm:py-6 md:py-8 lg:py-10"
       >
-        {/* Responsive Background ("SMOOTHER THAN YOUR AVERAGE" colour artwork) at 50% opacity */}
+        {/* Responsive Background ("SMOOTHER THAN YOUR AVERAGE" warped monochrome artwork) at 50% opacity */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
         >
-          {/* Phone / Mobile Viewport (< 768px): Portrait artwork behind the bottle */}
+          {/* Phone / Mobile Viewport (< 768px): Portrait 9:16 artwork behind top bottle */}
           <img
-            src="/media/originals/m04-vodka-bg-smoother-mobile.jpg"
+            src="/media/bw/m04-vodka-bg-smoother-mobile-bw.jpg"
             alt=""
             style={{ opacity: 0.5 }}
-            className="vodka-color-bg block h-full w-full object-cover object-top select-none md:hidden"
+            className="bw-enforced-media block h-full w-full object-cover object-top select-none md:hidden"
           />
 
-          {/* Desktop / Tablet Viewport (>= 768px): Wide artwork behind the left bottle */}
+          {/* Desktop / Tablet Viewport (>= 768px): Wide 16:6 artwork behind left bottle */}
           <img
-            src="/media/originals/m04-vodka-bg-smoother.jpg"
+            src="/media/bw/m04-vodka-bg-smoother-bw.jpg"
             alt=""
             style={{ opacity: 0.5 }}
-            className="vodka-color-bg hidden h-full w-full object-cover object-left select-none md:block"
+            className="bw-enforced-media hidden h-full w-full object-cover object-left select-none md:block"
           />
 
           {/* Subtle edge blends for phone (top-to-bottom readability) and desktop (left-to-right readability) */}
