@@ -121,7 +121,11 @@ img.product-color-media:hover,
 img.product-color-media:focus,
 img.product-color-media:active,
 .group:hover img.product-color-media,
-.group:focus-within img.product-color-media {
+.group:focus-within img.product-color-media,
+img.vodka-color-bg,
+img.vodka-color-bg:hover,
+img.vodka-color-bg:focus,
+img.vodka-color-bg:active {
   filter: none !important;
   -webkit-filter: none !important;
 }
