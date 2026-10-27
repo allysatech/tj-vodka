@@ -152,7 +152,7 @@ export function HeroProductStage() {
             decoding="sync"
             className="bw-enforced-media hidden h-full w-full object-cover object-center md:block"
           />
-          <div className="absolute inset-x-0 bottom-0 h-[38%] bg-[linear-gradient(to_top,rgba(8,8,8,0.15)_0%,rgba(8,8,8,0.15)_68%,transparent_100%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-[38%] bg-[linear-gradient(to_top,rgba(8,8,8,0.3)_0%,rgba(8,8,8,0.3)_68%,transparent_100%)]" />
         </div>
 
         <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col items-center justify-center px-6 md:px-12">
