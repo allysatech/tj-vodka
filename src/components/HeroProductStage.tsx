@@ -227,11 +227,9 @@ export function HeroProductStage() {
             {/* Slogan in Jost Medium */}
             <h1
               style={{ opacity: 0 }}
-              className="hero-intro-copy font-spirit text-[clamp(1.5rem,2.6vw,2.5rem)] font-medium uppercase leading-[1.1] tracking-[0.04em] drop-shadow-[0_4px_18px_rgba(0,0,0,0.8)]"
+              className="hero-intro-copy font-spirit text-[clamp(1.5rem,2.6vw,2.5rem)] font-medium uppercase leading-[1.1] tracking-[0.04em] text-[#FAF4E7] drop-shadow-[0_4px_18px_rgba(0,0,0,0.8)]"
             >
-              <span className="text-[#FAF4E7]">Smoother than </span>
-              <span className="text-[#FBBD4E]">your </span>
-              <span className="text-[#D01B23]">average.</span>
+              Smoother than your average.
             </h1>
 
             <p
