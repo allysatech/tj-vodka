@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
-import { MEDIA_SLOTS, SITE_CONTENT } from "@/config/siteContent";
+import { SITE_CONTENT } from "@/config/siteContent";
 import { MonochromeMedia } from "./MonochromeMedia";
 
 export function HeroProductStage() {
@@ -131,84 +131,31 @@ export function HeroProductStage() {
       <section
         id="hero"
         aria-label="Hero — TJ Vodka"
-        className="relative flex min-h-[100svh] w-full flex-col justify-between pt-16 pb-3 md:pt-[72px] md:pb-4 border-b border-[#BDBDBD]/15"
+        className="relative flex h-[100svh] w-full flex-col justify-end overflow-hidden pb-3 border-b border-[#BDBDBD]/15"
       >
-        {/* Media M02: Monochrome studio-light background layer (separate from bottle & text) */}
-        <div
-          data-media-slot="M02"
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
-        >
-          <MonochromeMedia
-            slotId="M02"
-            priority
-            className="h-full w-full opacity-80 studio-light-pulse"
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <img
+            src="/media/bw/m01-hero-script-mobile.jpg"
+            alt=""
+            width={576}
+            height={1024}
+            fetchPriority="high"
+            decoding="sync"
+            className="bw-enforced-media h-full w-full object-cover object-center md:hidden"
           />
-          {/* Controlled neutral spotlight & dark vignette */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_58%_50%_at_50%_40%,rgba(245,245,245,0.15)_0%,rgba(20,20,20,0.62)_54%,#080808_88%)]" />
+          <img
+            src="/media/bw/m01-hero-script.jpg"
+            alt="TJ Vodka bottle with a handwritten TJ Vodka signature"
+            width={1024}
+            height={576}
+            fetchPriority="high"
+            decoding="sync"
+            className="bw-enforced-media hidden h-full w-full object-cover object-center md:block"
+          />
+          <div className="absolute inset-x-0 bottom-0 h-[38%] bg-[linear-gradient(to_top,rgba(8,8,8,0.15)_0%,rgba(8,8,8,0.15)_68%,transparent_100%)]" />
         </div>
 
-        {/* Center Hero Stage: Bold Blocky "TJ VODKA" + Mirror Effect BEHIND the Central Bottle */}
-        <div className="relative z-10 mx-auto my-auto flex w-full max-w-[1400px] flex-col items-center justify-center px-6 py-1 md:px-12">
-          {/* Layered Stage where "TJ VODKA" & its Mirror Reflection sit directly BEHIND the Bottle */}
-          <div className="relative flex w-full items-center justify-center py-0.5 sm:py-1">
-            {/* Z-10 LAYER (BEHIND BOTTLE): Heavy Geometric Display "TJ VODKA" + Mirror Reflection Underneath */}
-            <div className="pointer-events-none absolute inset-x-0 top-[44%] z-10 flex -translate-y-1/2 flex-col items-center justify-center select-none">
-              {/* Primary Upright "TJ VODKA" Display Wordmark */}
-              <div style={{ opacity: 0 }} className="hero-intro-word">
-                <div
-                  style={{ transform: "scaleX(1.1)" }}
-                  className="flex items-center justify-center gap-[0.18em] sm:gap-[0.22em] md:gap-[0.26em] whitespace-nowrap font-display text-[clamp(2.6rem,9.2vw,9.4rem)] uppercase leading-[0.88] tracking-[0.04em] text-[#F5F5F5] drop-shadow-[0_12px_32px_rgba(0,0,0,0.85)]"
-                >
-                  <span>{SITE_CONTENT.hero.titleLeft}</span>
-                  <span>{SITE_CONTENT.hero.titleRight}</span>
-                </div>
-              </div>
-
-              {/* Subtle Studio Horizon Reflection Line */}
-              <div
-                aria-hidden="true"
-                className="my-0.5 h-[1px] w-[min(82vw,840px)] bg-gradient-to-r from-transparent via-[#BDBDBD]/50 to-transparent"
-              />
-
-              {/* Mirror Effect Directly Under "TJ VODKA" (Vertically Inverted Reflection) */}
-              <div
-                aria-hidden="true"
-                className="hero-mirror-reflection pointer-events-none -mt-0.5 sm:-mt-1 w-full px-6 pb-3 select-none"
-              >
-                <div style={{ opacity: 0 }} className="hero-intro-word w-full">
-                  <div
-                    style={{ transform: "scaleX(1.1) scaleY(-1)" }}
-                    className="flex items-center justify-center gap-[0.18em] sm:gap-[0.22em] md:gap-[0.26em] whitespace-nowrap font-display text-[clamp(2.6rem,9.2vw,9.4rem)] uppercase leading-[0.92] tracking-[0.04em] text-[#BDBDBD]/95 blur-[0.4px]"
-                  >
-                    <span>{SITE_CONTENT.hero.titleLeft}</span>
-                    <span>{SITE_CONTENT.hero.titleRight}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Z-20 / Z-30 FOREGROUND BOTTLE ANCHOR SLOT (In front of "TJ VODKA" & Mirror, scaled with svh so all Hero details fit in 1 viewport on laptops) */}
-            <div
-              data-media-slot="M01"
-              className="relative z-20 h-[clamp(200px,35svh,360px)] w-[clamp(100px,17.5svh,180px)] sm:h-[clamp(220px,37svh,390px)] sm:w-[clamp(110px,18.5svh,195px)]"
-            >
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -bottom-2 left-1/2 h-5 w-32 -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.9)_0%,rgba(189,189,189,0.12)_55%,transparent_80%)] blur-[2px]"
-              />
-              <img
-                src={MEDIA_SLOTS.M01.src}
-                alt={MEDIA_SLOTS.M01.alt}
-                width={MEDIA_SLOTS.M01.dimensions.width}
-                height={MEDIA_SLOTS.M01.dimensions.height}
-                fetchPriority="high"
-                decoding="sync"
-                className="bw-enforced-media bottle-highlight-filter relative z-20 h-full w-full rotate-[11.5deg] object-contain"
-              />
-            </div>
-          </div>
-
+        <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col items-center justify-center px-6 md:px-12">
           {/* Slogan (Luxury Spirit Typography), Subtitle & Primary/Secondary CTAs */}
           <div className="relative z-30 mt-2 sm:mt-3 flex max-w-2xl flex-col items-center text-center">
             {/* Luxury Distillery Crest Divider */}
