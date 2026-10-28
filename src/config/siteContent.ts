@@ -652,6 +652,37 @@ export const SITE_CONTENT = {
         "We operate a 30-day return policy — you have 30 days after receiving your item to request a return. To be eligible, the bottle must be unopened, unused, and in its original packaging with proof of purchase. Contact sales@tjvodka.co.uk to initiate a return.",
     },
   },
+  wholesalePartners: {
+    eyebrow: "WHERE TO BUY",
+    heading: "Wholesale Partners",
+    subheading: "Available through our UK wholesale partners.",
+    partners: [
+      {
+        name: "Inn Express",
+        logoSrc: "/brand/partners/inn-express.png",
+        href: "https://www.inn-express.com/product-ranges/spirits-liqueurs/tj-vodka",
+        place: "top" as const,
+      },
+      {
+        name: "Swallow",
+        logoSrc: "/brand/partners/swallow.png",
+        href: "https://www.swallow.uk.com/products/spirits/vodka/tj-vodka-70cl/",
+        place: "right" as const,
+      },
+      {
+        name: "Libra Drinks",
+        logoSrc: "/brand/partners/libra-drinks.png",
+        href: "https://www.libradrinks.co.uk/product-ranges/spirits/tj-vodka-tjvo01",
+        place: "bottom" as const,
+      },
+      {
+        name: "BestWines",
+        logoSrc: "/brand/partners/bestwines.png",
+        href: null,
+        place: "left" as const,
+      },
+    ],
+  },
   footer: {
     brandLine: "Smoother than your average.",
     responsibleDrinking: "Please enjoy TJ Vodka responsibly. 18+ only in the United Kingdom.",

@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { HeroProductStage } from "@/components/HeroProductStage";
 import { OurStorySection } from "@/components/OurStorySection";
 import { WorldOfTjSection } from "@/components/WorldOfTjSection";
+import { WholesalePartnersSection } from "@/components/WholesalePartnersSection";
 import { Footer } from "@/components/Footer";
 
 /**
@@ -27,6 +28,8 @@ export default function HomePage() {
 
         {/* Section 04: The World of TJ (One combined campaign & editorial gallery section) */}
         <WorldOfTjSection />
+
+        <WholesalePartnersSection />
       </main>
 
       {/* Section 05: Footer and Contact Links */}
