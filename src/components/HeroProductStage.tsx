@@ -158,19 +158,6 @@ export function HeroProductStage() {
         <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col items-center justify-center px-6 md:px-12">
           {/* Slogan (Luxury Spirit Typography), Subtitle & Primary/Secondary CTAs */}
           <div className="relative z-30 mt-2 sm:mt-3 flex max-w-2xl flex-col items-center text-center">
-            {/* Luxury Distillery Crest Divider */}
-            <div
-              aria-hidden="true"
-              style={{ opacity: 0 }}
-              className="hero-intro-copy mb-1.5 flex items-center justify-center gap-3"
-            >
-              <span className="h-[1px] w-8 sm:w-12 bg-gradient-to-r from-transparent to-[#BDBDBD]/60" />
-              <span className="font-cinzel text-[9px] uppercase tracking-[0.34em] text-[#BDBDBD]">
-                ◆ Signature Italian Spirit ◆
-              </span>
-              <span className="h-[1px] w-8 sm:w-12 bg-gradient-to-l from-transparent to-[#BDBDBD]/60" />
-            </div>
-
             {/* Slogan in Jost Medium */}
             <h1
               style={{ opacity: 0 }}
@@ -188,7 +175,7 @@ export function HeroProductStage() {
 
             <div
               style={{ opacity: 0 }}
-              className="hero-intro-copy mt-3.5 sm:mt-4 flex flex-wrap items-center justify-center gap-3 sm:gap-5"
+              className="hero-intro-copy mt-3 flex flex-wrap items-center justify-center gap-3 sm:gap-5"
             >
               <a
                 href={SITE_CONTENT.hero.primaryCta.href}
@@ -209,7 +196,7 @@ export function HeroProductStage() {
         </div>
 
         {/* Bottom Scroll Cue */}
-        <div className="relative z-20 mx-auto flex w-full max-w-[1400px] items-center justify-center px-6 md:px-12">
+        <div className="relative z-20 mx-auto mt-4 flex w-full max-w-[1400px] shrink-0 items-center justify-center px-6 pb-1 md:px-12">
           <a
             href="#vodka"
             onClick={handleScrollToVodka}
