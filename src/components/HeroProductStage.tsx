@@ -383,12 +383,12 @@ export function HeroProductStage() {
               <div className="mt-4 md:mt-5 flex flex-wrap items-center gap-3">
                 <Link
                   href="/products/tj-vodka"
-                  className="inline-flex items-center gap-2.5 border border-[#BDBDBD]/30 bg-[#080808]/50 px-3 py-1.5 transition-colors hover:border-[#F5F5F5]"
+                  className="inline-flex items-center gap-2.5 border border-[#BDBDBD]/30 bg-[#050505] px-3 py-1.5 transition-colors hover:border-[#F5F5F5]"
                 >
                   <img
-                    src="/media/originals/m10-original-studio.jpg"
+                    src="/media/bw/m04-bottle-clean.png"
                     alt=""
-                    className="bw-enforced-media h-8 w-4 object-cover object-center"
+                    className="bw-enforced-media h-8 w-4 object-contain object-center"
                   />
                   <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-[#F5F5F5]">
                     Original
@@ -396,12 +396,12 @@ export function HeroProductStage() {
                 </Link>
                 <Link
                   href="/products/tj-vodka?flavour=vanilla"
-                  className="inline-flex items-center gap-2.5 border border-[#BDBDBD]/30 bg-[#080808]/50 px-3 py-1.5 transition-colors hover:border-[#F5F5F5]"
+                  className="inline-flex items-center gap-2.5 border border-[#BDBDBD]/30 bg-[#050505] px-3 py-1.5 transition-colors hover:border-[#F5F5F5]"
                 >
                   <img
-                    src="/media/originals/m11-vanilla-studio.jpg"
+                    src="/media/originals/m11-vanilla-cutout.png"
                     alt=""
-                    className="product-color-media h-8 w-4 object-cover object-center"
+                    className="product-color-media h-8 w-4 object-contain object-center"
                   />
                   <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-[#F5F5F5]">
                     Vanilla

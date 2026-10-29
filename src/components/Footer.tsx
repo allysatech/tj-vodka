@@ -114,10 +114,16 @@ export function Footer({ compact = false }: FooterProps) {
                   href={SITE_CONTENT.brand.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[#F5F5F5] transition-colors hover:text-[#BDBDBD]"
+                  className="inline-flex items-center gap-2 text-[#F5F5F5] transition-colors hover:text-[#BDBDBD]"
                 >
+                  <img
+                    src="/brand/instagram-icon.png"
+                    alt=""
+                    width={16}
+                    height={16}
+                    className="h-4 w-4 shrink-0 object-contain"
+                  />
                   <span>Instagram {SITE_CONTENT.brand.instagramHandle}</span>
-                  <span aria-hidden="true">↗</span>
                 </a>
               </li>
               <li>

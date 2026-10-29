@@ -221,9 +221,16 @@ export default function ContactUtilityPage() {
                 href={SITE_CONTENT.brand.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 block font-serif text-2xl text-[#F5F5F5] underline underline-offset-4"
+                className="mt-2 inline-flex items-center gap-2.5 font-serif text-2xl text-[#F5F5F5] underline underline-offset-4"
               >
-                {SITE_CONTENT.brand.instagramHandle} ↗
+                <img
+                  src="/brand/instagram-icon.png"
+                  alt=""
+                  width={22}
+                  height={22}
+                  className="h-[1.1em] w-[1.1em] shrink-0 object-contain"
+                />
+                {SITE_CONTENT.brand.instagramHandle}
               </a>
               <p className="mt-2 font-sans text-xs text-[#A8A8A8]">
                 Official brand updates and editorial archive.
