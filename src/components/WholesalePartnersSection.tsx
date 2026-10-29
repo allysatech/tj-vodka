@@ -4,10 +4,10 @@ import { SITE_CONTENT } from "@/config/siteContent";
 type Partner = (typeof SITE_CONTENT.wholesalePartners.partners)[number];
 
 const ORBIT_POSITION: Record<Partner["place"], string> = {
-  top: "left-1/2 top-[14%] -translate-x-1/2 -translate-y-1/2",
-  right: "left-[92%] top-1/2 -translate-x-1/2 -translate-y-1/2",
-  bottom: "left-1/2 top-[80%] -translate-x-1/2 -translate-y-1/2",
-  left: "left-[8%] top-1/2 -translate-x-1/2 -translate-y-1/2",
+  top: "left-[22%] top-[20%] -translate-x-1/2 -translate-y-1/2",
+  right: "left-[78%] top-[20%] -translate-x-1/2 -translate-y-1/2",
+  left: "left-[22%] top-[74%] -translate-x-1/2 -translate-y-1/2",
+  bottom: "left-[78%] top-[74%] -translate-x-1/2 -translate-y-1/2",
 };
 
 function PartnerLogo({ partner }: { partner: Partner }) {
@@ -121,14 +121,6 @@ export function WholesalePartnersSection() {
                 >
                   TJ Vodka
                 </p>
-                <img
-                  src="/brand/tj-monogram-mark.png"
-                  alt=""
-                  width={488}
-                  height={778}
-                  className="partner-color-media pointer-events-none absolute z-[2] h-[1.05em] w-auto"
-                  style={{ left: "80%", top: "calc(100% + 0.78em)" }}
-                />
               </div>
             </div>
             {partners.map((partner) => (
