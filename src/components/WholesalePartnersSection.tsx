@@ -4,10 +4,10 @@ import { SITE_CONTENT } from "@/config/siteContent";
 type Partner = (typeof SITE_CONTENT.wholesalePartners.partners)[number];
 
 const ORBIT_POSITION: Record<Partner["place"], string> = {
-  top: "left-1/2 top-[18%] -translate-x-1/2 -translate-y-1/2",
-  right: "left-[82%] top-1/2 -translate-x-1/2 -translate-y-1/2",
-  bottom: "left-1/2 top-[82%] -translate-x-1/2 -translate-y-1/2",
-  left: "left-[18%] top-1/2 -translate-x-1/2 -translate-y-1/2",
+  top: "left-1/2 top-[14%] -translate-x-1/2 -translate-y-1/2",
+  right: "left-[92%] top-1/2 -translate-x-1/2 -translate-y-1/2",
+  bottom: "left-1/2 top-[80%] -translate-x-1/2 -translate-y-1/2",
+  left: "left-[8%] top-1/2 -translate-x-1/2 -translate-y-1/2",
 };
 
 function PartnerLogo({ partner }: { partner: Partner }) {
@@ -18,7 +18,7 @@ function PartnerLogo({ partner }: { partner: Partner }) {
       width={136}
       height={136}
       draggable={false}
-      className="h-full w-full object-contain"
+      className="partner-color-media h-full w-full object-contain"
     />
   );
 }
@@ -43,13 +43,13 @@ function PartnerCaption({ partner }: { partner: Partner }) {
   );
 }
 
-const WORDMARK_SIZE = { fontSize: "clamp(1.05rem, 6.6cqw, 3.25rem)" };
+const WORDMARK_SIZE = { fontSize: "clamp(1.35rem, 7.2cqw, 5.5rem)" };
 
 function OrbitPartner({ partner }: { partner: Partner }) {
-  const className = `group absolute z-10 block h-14 w-14 no-underline sm:h-20 sm:w-20 md:h-28 md:w-28 ${ORBIT_POSITION[partner.place]}`;
+  const className = `group absolute z-10 block h-16 w-16 no-underline sm:h-20 sm:w-20 md:h-28 md:w-28 lg:h-32 lg:w-32 ${ORBIT_POSITION[partner.place]}`;
   const body = (
     <>
-      <span className="block h-full w-full overflow-hidden rounded-full">
+      <span className="flex h-full w-full items-center justify-center transition duration-300 ease-out group-hover:scale-110">
         <PartnerLogo partner={partner} />
       </span>
       <span className="absolute left-1/2 top-full mt-1.5 flex w-[7.25rem] -translate-x-1/2 flex-col items-center text-center md:mt-2.5 md:w-40 md:whitespace-nowrap">
@@ -83,10 +83,10 @@ export function WholesalePartnersSection() {
     <section
       id="partners"
       aria-label="Wholesale Partners"
-      className="scroll-mt-16 border-t border-[#BDBDBD]/15 bg-[#080808] py-16 text-[#F5F5F5] md:py-20"
+      className="scroll-mt-16 border-t border-[#BDBDBD]/15 bg-[#080808] pb-10 pt-14 text-[#F5F5F5] md:flex md:h-[calc(100svh-4rem)] md:min-h-[40rem] md:flex-col md:py-6"
     >
-      <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-        <div className="mx-auto max-w-2xl text-center">
+      <div className="mx-auto flex w-full max-w-[1400px] flex-col px-6 md:h-full md:px-10">
+        <div className="mx-auto max-w-2xl shrink-0 text-center">
           <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.26em] text-[#A8A8A8]">
             {eyebrow}
           </p>
@@ -98,14 +98,11 @@ export function WholesalePartnersSection() {
           </p>
         </div>
 
-        <div className="relative mx-auto mt-8 w-full max-w-[740px] pb-4 md:mt-10 md:pb-0">
-          <div className="relative aspect-square w-full [container-type:inline-size]">
+        <div className="relative mx-auto mt-6 w-full pb-2 md:mt-3 md:min-h-0 md:flex-1 md:pb-12">
+          <div className="relative aspect-square w-full [container-type:inline-size] md:aspect-auto md:h-full">
             <div className="pointer-events-none absolute left-1/2 top-1/2 z-[1] -translate-x-1/2 -translate-y-1/2">
-              <div className="relative">
-                <p
-                  className="font-display whitespace-nowrap uppercase leading-none tracking-[0.02em] text-[#F5F5F5]"
-                  style={WORDMARK_SIZE}
-                >
+              <div className="relative" style={WORDMARK_SIZE}>
+                <p className="font-display whitespace-nowrap uppercase leading-none tracking-[0.02em] text-[#F5F5F5]">
                   TJ Vodka
                 </p>
                 <p
@@ -117,9 +114,9 @@ export function WholesalePartnersSection() {
                     transformOrigin: "center bottom",
                     filter: "blur(0.45px)",
                     maskImage:
-                      "linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.34) 36%, transparent 68%)",
+                      "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 28%, transparent 46%)",
                     WebkitMaskImage:
-                      "linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.34) 36%, transparent 68%)",
+                      "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 28%, transparent 46%)",
                   }}
                 >
                   TJ Vodka
@@ -129,8 +126,40 @@ export function WholesalePartnersSection() {
             {partners.map((partner) => (
               <OrbitPartner key={partner.name} partner={partner} />
             ))}
+            <img
+              src="/brand/tj-monogram-mark.png"
+              alt=""
+              width={280}
+              height={360}
+              className="partner-color-media pointer-events-none absolute z-[12] h-14 w-auto -translate-x-1/2 -translate-y-1/2 left-[66%] top-[78%] md:left-[60%] md:top-[76%] md:h-[4.25rem]"
+            />
           </div>
         </div>
+
+        <nav
+          aria-label="Wholesale partner websites"
+          className="mt-5 flex shrink-0 flex-wrap items-center justify-center md:mt-2"
+        >
+          {partners.map((partner, index) => (
+            <span key={partner.name} className="inline-flex items-center">
+              {index > 0 ? (
+                <span
+                  aria-hidden="true"
+                  className="mx-2.5 inline-block h-1.5 w-1.5 rounded-full md:mx-3"
+                  style={{ backgroundColor: partner.dot }}
+                />
+              ) : null}
+              <a
+                href={partner.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-sans text-sm tracking-[0.01em] text-[#F5F5F5] transition-colors hover:text-white md:text-[15px]"
+              >
+                {partner.name}
+              </a>
+            </span>
+          ))}
+        </nav>
       </div>
     </section>
   );

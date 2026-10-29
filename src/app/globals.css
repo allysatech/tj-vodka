@@ -121,7 +121,13 @@ img.product-color-media:hover,
 img.product-color-media:focus,
 img.product-color-media:active,
 .group:hover img.product-color-media,
-.group:focus-within img.product-color-media {
+.group:focus-within img.product-color-media,
+img.partner-color-media,
+img.partner-color-media:hover,
+img.partner-color-media:focus,
+img.partner-color-media:active,
+.group:hover img.partner-color-media,
+.group:focus-within img.partner-color-media {
   filter: none !important;
   -webkit-filter: none !important;
 }
