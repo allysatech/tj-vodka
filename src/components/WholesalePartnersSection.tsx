@@ -121,18 +121,19 @@ export function WholesalePartnersSection() {
                 >
                   TJ Vodka
                 </p>
+                <img
+                  src="/brand/tj-monogram-mark.png"
+                  alt=""
+                  width={488}
+                  height={778}
+                  className="partner-color-media pointer-events-none absolute z-[2] h-[1.05em] w-auto"
+                  style={{ left: "80%", top: "calc(100% + 0.78em)" }}
+                />
               </div>
             </div>
             {partners.map((partner) => (
               <OrbitPartner key={partner.name} partner={partner} />
             ))}
-            <img
-              src="/brand/tj-monogram-mark.png"
-              alt=""
-              width={280}
-              height={360}
-              className="partner-color-media pointer-events-none absolute z-[12] h-14 w-auto -translate-x-1/2 -translate-y-1/2 left-[66%] top-[78%] md:left-[60%] md:top-[76%] md:h-[4.25rem]"
-            />
           </div>
         </div>
 
