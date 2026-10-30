@@ -64,7 +64,7 @@ export default async function PolicyUtilityPage({
               href="/"
               className="font-sans text-[11px] uppercase tracking-[0.2em] text-[#A8A8A8] hover:text-[#F5F5F5]"
             >
-              ← Back to Homepage
+              Back to Homepage
             </Link>
             <span className="font-sans text-[10px] uppercase tracking-[0.24em] text-[#A8A8A8]">
               LEGAL POLICY UTILITY
@@ -142,7 +142,7 @@ export default async function PolicyUtilityPage({
                 rel="noopener noreferrer"
                 className="text-[#F5F5F5] underline underline-offset-4"
               >
-                tjvodka.co.uk/policies/{slug} ↗
+                tjvodka.co.uk/policies/{slug}
               </a>
             </p>
           </div>

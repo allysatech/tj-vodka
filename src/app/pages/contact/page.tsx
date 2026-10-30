@@ -19,7 +19,7 @@ export default function ContactUtilityPage() {
               href="/#contact"
               className="font-sans text-[11px] uppercase tracking-[0.2em] text-[#A8A8A8] hover:text-[#F5F5F5]"
             >
-              ← Back to Homepage Footer
+              Back to Homepage Footer
             </Link>
             <span className="font-sans text-[10px] uppercase tracking-[0.24em] text-[#A8A8A8]">
               SUPPORTING CONTACT UTILITY
@@ -133,9 +133,9 @@ export default function ContactUtilityPage() {
               <button
                 type="submit"
                 aria-label="Subscribe"
-                className="px-4 text-xl text-[#F5F5F5]"
+                className="px-4 font-sans text-[11px] uppercase tracking-[0.18em] text-[#F5F5F5]"
               >
-                →
+                Subscribe
               </button>
             </form>
             <p className="mt-8 font-sans text-sm text-[#F5F5F5]">

@@ -120,7 +120,7 @@ export function Footer({ compact = false }: FooterProps) {
                   href="/pages/contact"
                   className="text-[#A8A8A8] transition-colors hover:text-[#F5F5F5]"
                 >
-                  Customer &amp; Trade Enquiries →
+                  Customer &amp; Trade Enquiries
                 </Link>
               </li>
               <li className="pt-1 text-[11px] text-[#A8A8A8]/80">

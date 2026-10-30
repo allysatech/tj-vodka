@@ -184,10 +184,9 @@ export function HeroProductStage() {
               </a>
               <Link
                 href={SITE_CONTENT.hero.secondaryCta.href}
-                className="inline-flex items-center gap-2 border border-[#BDBDBD]/50 bg-[#080808] px-6 py-2.5 font-sans text-[11px] uppercase tracking-[0.2em] text-[#F5F5F5] transition-colors duration-200 hover:border-[#F5F5F5]"
+                className="inline-flex items-center border border-[#BDBDBD]/50 bg-[#080808] px-6 py-2.5 font-sans text-[11px] uppercase tracking-[0.2em] text-[#F5F5F5] transition-colors duration-200 hover:border-[#F5F5F5]"
               >
-                <span>{SITE_CONTENT.hero.secondaryCta.label}</span>
-                <span aria-hidden="true">→</span>
+                {SITE_CONTENT.hero.secondaryCta.label}
               </Link>
             </div>
           </div>
@@ -384,7 +383,7 @@ export function HeroProductStage() {
                   {SITE_CONTENT.productExplorer.cta.label}
                 </Link>
                 <span className="font-sans text-[10px] md:text-[11px] tracking-[0.12em] text-[#A8A8A8]">
-                  Live pricing &amp; availability on product page →
+                  Live pricing &amp; availability on product page
                 </span>
               </div>
             </div>

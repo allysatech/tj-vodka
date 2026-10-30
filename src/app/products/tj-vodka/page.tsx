@@ -139,10 +139,9 @@ function ProductShopPageInner() {
           <div className="mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-[#BDBDBD]/15 pb-4">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.2em] text-[#A8A8A8] transition-colors hover:text-[#F5F5F5]"
+              className="inline-flex items-center font-sans text-[11px] uppercase tracking-[0.2em] text-[#A8A8A8] transition-colors hover:text-[#F5F5F5]"
             >
-              <span aria-hidden="true">←</span>
-              <span>Back to Homepage</span>
+              Back to Homepage
             </Link>
           </div>
 
@@ -414,8 +413,8 @@ function ProductShopPageInner() {
                     className="flex-1 border border-[#BDBDBD]/60 bg-[#080808] px-6 py-4 text-center font-sans text-xs uppercase tracking-[0.2em] text-[#F5F5F5] transition-colors duration-200 hover:border-[#F5F5F5] hover:bg-[#F4F4F4] hover:text-[#151515]"
                   >
                     {canCheckout
-                      ? "Proceed to Shopify Checkout ↗"
-                      : "View official store ↗"}
+                      ? "Proceed to Shopify Checkout"
+                      : "View official store"}
                   </a>
                 </div>
 
@@ -488,7 +487,7 @@ function ProductShopPageInner() {
                   href="/policies/refund-policy"
                   className="font-sans text-[11px] uppercase tracking-[0.18em] text-[#F5F5F5] underline underline-offset-4"
                 >
-                  Read Full Refund Policy →
+                  Read Full Refund Policy
                 </Link>
               </div>
             </div>
