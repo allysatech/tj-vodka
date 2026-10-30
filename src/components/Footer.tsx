@@ -21,25 +21,14 @@ export function Footer({ compact = false }: FooterProps) {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           {/* Brand Column */}
           <div className="flex flex-col md:col-span-5">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-3.5 text-[#F5F5F5] no-underline"
-            >
+            <Link href="/" aria-label="TJ Vodka" className="inline-flex w-fit">
               <img
-                src={SITE_CONTENT.brand.logoSrc}
-                alt="TJ Vodka Logo"
-                width={34}
-                height={48}
-                className="bw-enforced-media h-10 w-auto object-contain"
+                src="/brand/tj-lockup-footer.png"
+                alt="TJ Vodka"
+                width={506}
+                height={798}
+                className="h-auto w-24 object-contain md:w-28"
               />
-              <div className="flex flex-col leading-none">
-                <span className="font-serif text-2xl tracking-[0.18em] text-[#F5F5F5]">
-                  TJ
-                </span>
-                <span className="font-sans text-[9px] tracking-[0.38em] text-[#A8A8A8] mt-1">
-                  VODKA
-                </span>
-              </div>
             </Link>
 
             <p className="mt-5 font-spirit text-xl uppercase tracking-[0.03em]">

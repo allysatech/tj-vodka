@@ -130,30 +130,32 @@ export function HeroProductStage() {
       <section
         id="hero"
         aria-label="Hero — TJ Vodka"
-        className="relative flex h-[100svh] w-full flex-col overflow-hidden border-b border-[#BDBDBD]/15 bg-[#080808] pt-16"
+        className="relative h-[100svh] w-full overflow-hidden border-b border-[#BDBDBD]/15 bg-[#080808]"
       >
-        <div className="relative z-0 flex min-h-0 flex-1 items-end justify-center px-3 md:px-8">
-          <img
-            src="/media/bw/m01-hero-signature-mobile.jpg"
-            alt=""
-            width={576}
-            height={460}
-            fetchPriority="high"
-            decoding="sync"
-            className="bw-enforced-media h-full w-full object-contain object-bottom md:hidden"
-          />
-          <img
-            src="/media/bw/m01-hero-signature.jpg"
-            alt="TJ Vodka bottle with a handwritten TJ Vodka signature"
-            width={1024}
-            height={304}
-            fetchPriority="high"
-            decoding="sync"
-            className="bw-enforced-media hidden h-full w-full object-contain object-bottom md:block"
-          />
-        </div>
+        <img
+          src="/media/bw/m01-hero-signature-mobile.jpg"
+          alt=""
+          width={576}
+          height={1024}
+          fetchPriority="high"
+          decoding="sync"
+          className="bw-enforced-media absolute inset-0 h-full w-full object-cover object-center md:hidden"
+        />
+        <img
+          src="/media/bw/m01-hero-signature.jpg"
+          alt="TJ Vodka bottle with a handwritten TJ Vodka signature"
+          width={1024}
+          height={576}
+          fetchPriority="high"
+          decoding="sync"
+          className="bw-enforced-media absolute inset-0 hidden h-full w-full object-cover object-center md:block"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[42%] bg-[linear-gradient(to_top,rgba(8,8,8,0.55)_0%,rgba(8,8,8,0.18)_60%,transparent_100%)]"
+        />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-[1400px] shrink-0 flex-col items-center px-6 pb-3 pt-4 md:px-12 md:pt-5">
+        <div className="relative z-10 mx-auto flex h-full w-full max-w-[1400px] flex-col items-center justify-end px-6 pb-0 pt-16 md:px-12 md:pb-1">
           <div className="flex max-w-2xl flex-col items-center text-center">
             <h1
               style={{ opacity: 0 }}
