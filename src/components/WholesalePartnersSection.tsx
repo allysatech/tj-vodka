@@ -42,8 +42,6 @@ function PartnerCaption({ partner }: { partner: Partner }) {
   );
 }
 
-const WORDMARK_SIZE = { fontSize: "clamp(1.35rem, 7.2cqw, 5.5rem)" };
-
 function OrbitPartner({ partner }: { partner: Partner }) {
   const className = `group absolute z-10 block h-16 w-16 no-underline sm:h-20 sm:w-20 md:h-28 md:w-28 lg:h-32 lg:w-32 ${ORBIT_POSITION[partner.place]}`;
   const body = (
@@ -99,48 +97,23 @@ export function WholesalePartnersSection() {
 
         <div className="relative mx-auto mt-6 w-full pb-2 md:mt-3 md:min-h-0 md:flex-1 md:pb-12">
           <div className="relative aspect-square w-full [container-type:inline-size] md:aspect-auto md:h-full">
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-              className="pointer-events-none absolute inset-0 z-0 h-full w-full"
-            >
-              <path
-                d="M 22 20 C 8 35, 8 59, 22 74"
-                fill="none"
-                stroke="#F5F5F5"
-                strokeWidth="1"
-                strokeOpacity="0.22"
-                vectorEffect="non-scaling-stroke"
-              />
-              <path
-                d="M 78 20 C 92 35, 92 59, 78 74"
-                fill="none"
-                stroke="#F5F5F5"
-                strokeWidth="1"
-                strokeOpacity="0.22"
-                vectorEffect="non-scaling-stroke"
-              />
-            </svg>
             <div className="pointer-events-none absolute left-1/2 top-1/2 z-[1] -translate-x-1/2 -translate-y-1/2">
-              <div className="relative" style={WORDMARK_SIZE}>
-                <div className="flex items-center gap-[0.14em] whitespace-nowrap leading-none text-[#F5F5F5]">
-                  <img
-                    src="/brand/tj-logo-white.png"
-                    alt=""
-                    width={134}
-                    height={193}
-                    className="h-[0.92em] w-auto shrink-0 object-contain"
-                  />
-                  <span className="font-display uppercase tracking-[0.02em]">
-                    Vodka
-                  </span>
-                </div>
-                <div
+              <div className="relative">
+                <img
+                  src="/brand/tj-logo-white.png"
+                  alt=""
+                  width={1026}
+                  height={1475}
+                  className="h-[clamp(5.5rem,20cqw,9.5rem)] w-auto object-contain"
+                />
+                <img
                   aria-hidden="true"
-                  className="absolute inset-x-0 top-0 flex items-center gap-[0.14em] whitespace-nowrap leading-none text-[#F5F5F5]"
+                  src="/brand/tj-logo-white.png"
+                  alt=""
+                  width={1026}
+                  height={1475}
+                  className="absolute inset-x-0 top-0 h-[clamp(5.5rem,20cqw,9.5rem)] w-auto object-contain"
                   style={{
-                    ...WORDMARK_SIZE,
                     transform: "scaleY(-1)",
                     transformOrigin: "center bottom",
                     filter: "blur(0.45px)",
@@ -149,18 +122,7 @@ export function WholesalePartnersSection() {
                     WebkitMaskImage:
                       "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 28%, transparent 46%)",
                   }}
-                >
-                  <img
-                    src="/brand/tj-logo-white.png"
-                    alt=""
-                    width={134}
-                    height={193}
-                    className="h-[0.92em] w-auto shrink-0 object-contain"
-                  />
-                  <span className="font-display uppercase tracking-[0.02em]">
-                    Vodka
-                  </span>
-                </div>
+                />
               </div>
             </div>
             {partners.map((partner) => (

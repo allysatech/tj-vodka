@@ -25,9 +25,9 @@ export function Footer({ compact = false }: FooterProps) {
               <img
                 src="/brand/tj-lockup-footer.png"
                 alt="TJ Vodka"
-                width={506}
-                height={798}
-                className="h-auto w-24 object-contain md:w-28"
+                width={1221}
+                height={3060}
+                className="h-auto w-16 object-contain md:w-20"
               />
             </Link>
 
