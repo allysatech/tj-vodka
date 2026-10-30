@@ -243,15 +243,15 @@ export function HeroProductStage() {
 
         <div className="relative z-10 mx-auto flex h-full w-full max-w-[1400px] items-center px-6 py-4 md:px-12 md:py-5">
           <div className="flex w-full flex-col text-right md:ml-auto md:w-[min(100%,640px)] lg:w-[min(100%,700px)]">
-              <span className="font-sans text-[10px] uppercase tracking-[0.26em] text-[#A8A8A8]">
+              <span className="font-sans text-[9px] uppercase tracking-[0.26em] text-[#A8A8A8]">
                 {SITE_CONTENT.productExplorer.eyebrow}
               </span>
 
-              <h2 className="mt-1.5 font-serif text-[clamp(1.9rem,3.6vw,3.3rem)] font-light leading-[1.02] tracking-[0.04em] text-[#F5F5F5]">
+              <h2 className="mt-1 font-serif text-[clamp(1.6rem,3vw,2.7rem)] font-light leading-[1.02] tracking-[0.04em] text-[#F5F5F5]">
                 {SITE_CONTENT.productExplorer.heading}
               </h2>
 
-              <p className="mt-1 font-spirit text-sm md:text-base tracking-[0.03em] text-[#BDBDBD]">
+              <p className="mt-1 font-spirit text-xs tracking-[0.03em] text-[#BDBDBD] md:text-sm">
                 {SITE_CONTENT.productExplorer.subheading}
               </p>
 
@@ -276,7 +276,7 @@ export function HeroProductStage() {
                       tabIndex={isSelected ? 0 : -1}
                       onClick={() => setActiveTabId(tab.id)}
                       onKeyDown={(e) => handleTabKeyDown(e, idx)}
-                      className={`relative pb-2.5 font-sans text-[11px] md:text-xs uppercase tracking-[0.22em] transition-colors duration-200 ${
+                      className={`relative pb-2 font-sans text-[10px] uppercase tracking-[0.22em] transition-colors duration-200 md:text-[11px] ${
                         isSelected
                           ? "text-[#F5F5F5] font-medium"
                           : "text-[#A8A8A8] hover:text-[#F5F5F5]"
@@ -295,7 +295,7 @@ export function HeroProductStage() {
               </div>
 
               {/* Tab Panels */}
-              <div className="mt-3.5 md:mt-4 min-h-[108px] md:min-h-[118px]">
+              <div className="mt-3 min-h-[92px] md:mt-3.5 md:min-h-[100px]">
                 {SITE_CONTENT.productExplorer.tabs.map((tab) => {
                   const isSelected = activeTabId === tab.id;
                   return (
@@ -308,13 +308,13 @@ export function HeroProductStage() {
                       tabIndex={0}
                       className="focus:outline-none"
                     >
-                      <h3 className="font-serif text-lg md:text-xl font-normal text-[#F5F5F5]">
+                      <h3 className="font-serif text-base font-normal text-[#F5F5F5] md:text-lg">
                         {tab.title}
                       </h3>
-                      <p className="mt-1.5 font-sans text-xs leading-snug text-[#F5F5F5]/90 md:ml-auto md:max-w-xl md:text-[13px] md:leading-[1.65]">
+                      <p className="mt-1 font-sans text-[11px] leading-snug text-[#F5F5F5]/90 md:ml-auto md:max-w-xl md:text-xs md:leading-relaxed">
                         {tab.body}
                       </p>
-                      <p className="mt-1.5 font-sans text-[10px] leading-snug text-[#A8A8A8]">
+                      <p className="mt-1 font-sans text-[9px] leading-snug text-[#A8A8A8]">
                         {tab.note}
                       </p>
                     </div>
@@ -329,7 +329,7 @@ export function HeroProductStage() {
                     <dt className="font-sans text-[9px] uppercase tracking-[0.22em] text-[#A8A8A8]">
                       {spec.label}
                     </dt>
-                    <dd className="mt-0.5 font-serif text-xl md:text-2xl font-light text-[#F5F5F5]">
+                    <dd className="mt-0.5 font-serif text-lg font-light text-[#F5F5F5] md:text-xl">
                       {spec.value}
                     </dd>
                     <span className="mt-0.5 font-sans text-[9px] md:text-[10px] leading-tight text-[#A8A8A8]">
@@ -350,10 +350,10 @@ export function HeroProductStage() {
                     alt=""
                     className="bw-enforced-media h-20 w-auto object-contain object-bottom transition duration-300 group-hover:scale-105 sm:h-24"
                   />
-                  <span className="mt-3 font-sans text-[11px] uppercase tracking-[0.28em] text-[#F5F5F5]">
+                  <span className="mt-2 font-sans text-[10px] uppercase tracking-[0.28em] text-[#F5F5F5]">
                     Original
                   </span>
-                  <span className="mt-1 font-serif text-xs italic text-[#A8A8A8]">
+                  <span className="mt-0.5 font-serif text-[11px] italic text-[#A8A8A8]">
                     Unflavoured
                   </span>
                 </Link>
@@ -366,10 +366,10 @@ export function HeroProductStage() {
                     alt=""
                     className="product-color-media h-20 w-auto object-contain object-bottom transition duration-300 group-hover:scale-105 sm:h-24"
                   />
-                  <span className="mt-3 font-sans text-[11px] uppercase tracking-[0.28em] text-[#F5F5F5]">
+                  <span className="mt-2 font-sans text-[10px] uppercase tracking-[0.28em] text-[#F5F5F5]">
                     Vanilla
                   </span>
-                  <span className="mt-1 font-serif text-xs italic text-[#A8A8A8]">
+                  <span className="mt-0.5 font-serif text-[11px] italic text-[#A8A8A8]">
                     Flavoured
                   </span>
                 </Link>
@@ -378,11 +378,11 @@ export function HeroProductStage() {
               <div className="mt-2.5 flex flex-wrap items-center justify-end gap-4 md:mt-4 md:gap-6">
                 <Link
                   href={SITE_CONTENT.productExplorer.cta.href}
-                  className="inline-flex items-center justify-center border border-[#F5F5F5] bg-[#F4F4F4] px-6 py-2.5 md:px-7 md:py-3 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-[#151515] transition-colors duration-200 hover:bg-transparent hover:text-[#F5F5F5]"
+                  className="inline-flex items-center justify-center border border-[#F5F5F5] bg-[#F4F4F4] px-5 py-2 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-[#151515] transition-colors duration-200 hover:bg-transparent hover:text-[#F5F5F5] md:px-6 md:py-2.5"
                 >
                   {SITE_CONTENT.productExplorer.cta.label}
                 </Link>
-                <span className="font-sans text-[10px] md:text-[11px] tracking-[0.12em] text-[#A8A8A8]">
+                <span className="font-sans text-[9px] tracking-[0.12em] text-[#A8A8A8] md:text-[10px]">
                   Live pricing &amp; availability on product page
                 </span>
               </div>
