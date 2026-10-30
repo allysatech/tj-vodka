@@ -241,7 +241,7 @@ export function HeroProductStage() {
         </div>
 
         <div className="relative z-10 mx-auto flex h-full w-full max-w-[1400px] items-center px-6 py-4 md:px-12 md:py-5">
-          <div className="flex w-full flex-col md:ml-auto md:w-[min(100%,640px)] lg:w-[min(100%,700px)]">
+          <div className="flex w-full flex-col text-right md:ml-auto md:w-[min(100%,640px)] lg:w-[min(100%,700px)]">
               <span className="font-sans text-[10px] uppercase tracking-[0.26em] text-[#A8A8A8]">
                 {SITE_CONTENT.productExplorer.eyebrow}
               </span>
@@ -258,7 +258,7 @@ export function HeroProductStage() {
               <div
                 role="tablist"
                 aria-label="TJ Vodka Information Tabs"
-                className="mt-4 md:mt-5 flex items-center gap-6 sm:gap-8 border-b border-[#BDBDBD]/25"
+                className="mt-4 flex items-center justify-end gap-6 border-b border-[#BDBDBD]/25 sm:gap-8 md:mt-5"
               >
                 {SITE_CONTENT.productExplorer.tabs.map((tab, idx) => {
                   const isSelected = activeTabId === tab.id;
@@ -310,7 +310,7 @@ export function HeroProductStage() {
                       <h3 className="font-serif text-lg md:text-xl font-normal text-[#F5F5F5]">
                         {tab.title}
                       </h3>
-                      <p className="mt-1.5 max-w-xl font-sans text-xs md:text-[13px] leading-[1.65] text-[#F5F5F5]/90">
+                      <p className="mt-1.5 font-sans text-xs leading-snug text-[#F5F5F5]/90 md:ml-auto md:max-w-xl md:text-[13px] md:leading-[1.65]">
                         {tab.body}
                       </p>
                       <p className="mt-1.5 font-sans text-[10px] leading-snug text-[#A8A8A8]">
@@ -322,9 +322,9 @@ export function HeroProductStage() {
               </div>
 
               {/* Verified Specifications Row */}
-              <dl className="mt-4 md:mt-5 grid grid-cols-3 gap-4 md:gap-6 border-y border-[#BDBDBD]/20 py-3 md:py-3.5">
+              <dl className="mt-3 flex justify-end gap-6 border-y border-[#BDBDBD]/20 py-2 md:mt-5 md:gap-10 md:py-3.5">
                 {SITE_CONTENT.productExplorer.specifications.map((spec) => (
-                  <div key={spec.label} className="flex flex-col">
+                  <div key={spec.label} className="flex flex-col items-end">
                     <dt className="font-sans text-[9px] uppercase tracking-[0.22em] text-[#A8A8A8]">
                       {spec.label}
                     </dt>
@@ -339,36 +339,42 @@ export function HeroProductStage() {
               </dl>
 
               {/* Flavour range + CTA */}
-              <div className="mt-3 grid grid-cols-2 gap-3 md:mt-4">
+              <div className="ml-auto mt-3 grid w-full max-w-md grid-cols-2 gap-6 md:mt-5 md:gap-10">
                 <Link
                   href="/products/tj-vodka"
-                  className="inline-flex items-center justify-center gap-3 border border-[#BDBDBD]/40 bg-[#050505] px-3 py-3 transition-colors hover:border-[#F5F5F5] sm:gap-4 sm:px-5 sm:py-3.5"
+                  className="group flex flex-col items-center text-center"
                 >
                   <img
                     src="/media/bw/m04-bottle-clean.png"
                     alt=""
-                    className="bw-enforced-media h-16 w-8 object-contain object-center sm:h-[4.75rem] sm:w-10"
+                    className="bw-enforced-media h-20 w-auto object-contain object-bottom transition duration-300 group-hover:scale-105 sm:h-24"
                   />
-                  <span className="font-sans text-xs uppercase tracking-[0.16em] text-[#F5F5F5] sm:text-sm sm:tracking-[0.18em]">
+                  <span className="mt-3 font-sans text-[11px] uppercase tracking-[0.28em] text-[#F5F5F5]">
                     Original
+                  </span>
+                  <span className="mt-1 font-serif text-xs italic text-[#A8A8A8]">
+                    Unflavoured
                   </span>
                 </Link>
                 <Link
                   href="/products/tj-vodka?flavour=vanilla"
-                  className="inline-flex items-center justify-center gap-3 border border-[#BDBDBD]/40 bg-[#050505] px-3 py-3 transition-colors hover:border-[#F5F5F5] sm:gap-4 sm:px-5 sm:py-3.5"
+                  className="group flex flex-col items-center text-center"
                 >
                   <img
                     src="/media/originals/m11-vanilla-cutout.png"
                     alt=""
-                    className="product-color-media h-16 w-8 object-contain object-center sm:h-[4.75rem] sm:w-10"
+                    className="product-color-media h-20 w-auto object-contain object-bottom transition duration-300 group-hover:scale-105 sm:h-24"
                   />
-                  <span className="font-sans text-xs uppercase tracking-[0.16em] text-[#F5F5F5] sm:text-sm sm:tracking-[0.18em]">
+                  <span className="mt-3 font-sans text-[11px] uppercase tracking-[0.28em] text-[#F5F5F5]">
                     Vanilla
+                  </span>
+                  <span className="mt-1 font-serif text-xs italic text-[#A8A8A8]">
+                    Flavoured
                   </span>
                 </Link>
               </div>
 
-              <div className="mt-3.5 md:mt-4 flex flex-wrap items-center gap-4 md:gap-6">
+              <div className="mt-2.5 flex flex-wrap items-center justify-end gap-4 md:mt-4 md:gap-6">
                 <Link
                   href={SITE_CONTENT.productExplorer.cta.href}
                   className="inline-flex items-center justify-center border border-[#F5F5F5] bg-[#F4F4F4] px-6 py-2.5 md:px-7 md:py-3 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-[#151515] transition-colors duration-200 hover:bg-transparent hover:text-[#F5F5F5]"
