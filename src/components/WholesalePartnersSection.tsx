@@ -30,9 +30,8 @@ function PartnerCaption({ partner }: { partner: Partner }) {
         {partner.name}
       </span>
       {partner.href ? (
-        <span className="mt-0.5 inline-flex items-center gap-1 font-sans text-[10px] tracking-[0.04em] text-[#A8A8A8] underline decoration-[#A8A8A8]/50 underline-offset-4 transition-colors group-hover:text-[#F5F5F5] md:mt-1 md:text-[11px] md:tracking-[0.06em]">
+        <span className="mt-0.5 inline-flex items-center font-sans text-[10px] tracking-[0.04em] text-[#A8A8A8] underline decoration-[#A8A8A8]/50 underline-offset-4 transition-colors group-hover:text-[#F5F5F5] md:mt-1 md:text-[11px] md:tracking-[0.06em]">
           View TJ Vodka
-          <span aria-hidden="true">↗</span>
         </span>
       ) : (
         <span className="mt-0.5 font-sans text-[10px] tracking-[0.04em] text-[#A8A8A8] md:mt-1 md:text-[11px]">

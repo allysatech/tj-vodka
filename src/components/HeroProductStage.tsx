@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { SITE_CONTENT } from "@/config/siteContent";
-import { MonochromeMedia } from "./MonochromeMedia";
 
 export function HeroProductStage() {
   if (typeof document !== "undefined") {
@@ -131,37 +130,34 @@ export function HeroProductStage() {
       <section
         id="hero"
         aria-label="Hero — TJ Vodka"
-        className="relative flex h-[100svh] w-full flex-col justify-end overflow-hidden pb-3 border-b border-[#BDBDBD]/15"
+        className="relative flex h-[100svh] w-full flex-col overflow-hidden border-b border-[#BDBDBD]/15 bg-[#080808] pt-16"
       >
-        <div className="pointer-events-none absolute inset-0 z-0">
+        <div className="relative z-0 flex min-h-0 flex-1 items-end justify-center px-3 md:px-8">
           <img
-            src="/media/bw/m01-hero-script-mobile.jpg"
+            src="/media/bw/m01-hero-signature-mobile.jpg"
             alt=""
             width={576}
-            height={1024}
+            height={460}
             fetchPriority="high"
             decoding="sync"
-            className="bw-enforced-media h-full w-full object-cover object-center md:hidden"
+            className="bw-enforced-media h-full w-full object-contain object-bottom md:hidden"
           />
           <img
-            src="/media/bw/m01-hero-script.jpg"
+            src="/media/bw/m01-hero-signature.jpg"
             alt="TJ Vodka bottle with a handwritten TJ Vodka signature"
             width={1024}
-            height={576}
+            height={304}
             fetchPriority="high"
             decoding="sync"
-            className="bw-enforced-media hidden h-full w-full object-cover object-center md:block"
+            className="bw-enforced-media hidden h-full w-full object-contain object-bottom md:block"
           />
-          <div className="absolute inset-x-0 bottom-0 h-[38%] bg-[linear-gradient(to_top,rgba(8,8,8,0.3)_0%,rgba(8,8,8,0.3)_68%,transparent_100%)]" />
         </div>
 
-        <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col items-center justify-center px-6 md:px-12">
-          {/* Slogan (Luxury Spirit Typography), Subtitle & Primary/Secondary CTAs */}
-          <div className="relative z-30 mt-2 sm:mt-3 flex max-w-2xl flex-col items-center text-center">
-            {/* Slogan in Jost Medium */}
+        <div className="relative z-10 mx-auto flex w-full max-w-[1400px] shrink-0 flex-col items-center px-6 pb-3 pt-4 md:px-12 md:pt-5">
+          <div className="flex max-w-2xl flex-col items-center text-center">
             <h1
               style={{ opacity: 0 }}
-              className="hero-intro-copy font-spirit text-[clamp(1.5rem,2.6vw,2.5rem)] font-medium uppercase leading-[1.1] tracking-[0.04em] text-[#FAF4E7] drop-shadow-[0_4px_18px_rgba(0,0,0,0.8)]"
+              className="hero-intro-copy font-spirit text-[clamp(1.5rem,2.6vw,2.5rem)] font-medium uppercase leading-[1.1] tracking-[0.04em] text-[#FAF4E7]"
             >
               Smoother than your average.
             </h1>
@@ -186,21 +182,18 @@ export function HeroProductStage() {
               </a>
               <Link
                 href={SITE_CONTENT.hero.secondaryCta.href}
-                className="inline-flex items-center gap-2 border border-[#BDBDBD]/50 bg-[#080808]/60 px-6 py-2.5 font-sans text-[11px] uppercase tracking-[0.2em] text-[#F5F5F5] transition-colors duration-200 hover:border-[#F5F5F5]"
+                className="inline-flex items-center gap-2 border border-[#BDBDBD]/50 bg-[#080808] px-6 py-2.5 font-sans text-[11px] uppercase tracking-[0.2em] text-[#F5F5F5] transition-colors duration-200 hover:border-[#F5F5F5]"
               >
                 <span>{SITE_CONTENT.hero.secondaryCta.label}</span>
                 <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>
-        </div>
 
-        {/* Bottom Scroll Cue */}
-        <div className="relative z-20 mx-auto mt-4 flex w-full max-w-[1400px] shrink-0 items-center justify-center px-6 pb-1 md:px-12">
           <a
             href="#vodka"
             onClick={handleScrollToVodka}
-            className="group inline-flex flex-col items-center gap-1.5 font-sans text-[9px] uppercase tracking-[0.28em] text-[#A8A8A8] transition-colors hover:text-[#F5F5F5]"
+            className="group mt-4 inline-flex flex-col items-center gap-1.5 pb-1 font-sans text-[9px] uppercase tracking-[0.28em] text-[#A8A8A8] transition-colors hover:text-[#F5F5F5]"
           >
             <span>Scroll to Discover</span>
             <span
@@ -212,14 +205,13 @@ export function HeroProductStage() {
       </section>
 
       {/* =====================================================================
-          SECTION 02: THE VODKA — PRODUCT EXPLORER (HWAYO-INSPIRED LAYOUT)
-          Large bottle on the left; heading, 3 selectable tabs & specs on the right.
-          Fits 100% in 1 viewport on laptops/desktops and phones.
+          SECTION 02: THE VODKA — PRODUCT EXPLORER
+          Heading, tabs, specs, and flavour buttons. One viewport, no bottle.
          ===================================================================== */}
       <section
         id="vodka"
         aria-label="The Vodka — Product Explorer"
-        className="relative z-20 flex min-h-[calc(100svh-4rem)] w-full flex-col justify-center overflow-hidden scroll-mt-16 border-b border-[#BDBDBD]/15 bg-[#050505] py-5 sm:py-6 md:py-8 lg:py-10"
+        className="relative z-20 flex h-[calc(100svh-4rem)] w-full flex-col justify-center overflow-hidden scroll-mt-16 border-b border-[#BDBDBD]/15 bg-[#050505]"
       >
         {/* Responsive Background ("SMOOTHER THAN YOUR AVERAGE" warped monochrome artwork) at 50% opacity */}
         <div
@@ -243,46 +235,13 @@ export function HeroProductStage() {
           />
 
           {/* Subtle edge blends for phone (top-to-bottom readability) and desktop (left-to-right readability) */}
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,#050505_0%,transparent_8%,transparent_48%,rgba(5,5,5,0.86)_66%,#050505_100%)] md:bg-[linear-gradient(180deg,#050505_0%,transparent_12%,transparent_88%,#050505_100%)]" />
-          <div className="hidden md:block absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,transparent_46%,rgba(5,5,5,0.82)_66%,#050505_100%)]" />
+          <div className="absolute inset-0 bg-[#050505]/50 md:bg-transparent" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,#050505_0%,rgba(5,5,5,0.55)_18%,rgba(5,5,5,0.55)_82%,#050505_100%)] md:bg-[linear-gradient(180deg,#050505_0%,transparent_12%,transparent_88%,#050505_100%)]" />
+          <div className="hidden md:block absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,transparent_34%,rgba(5,5,5,0.72)_52%,#050505_72%)]" />
         </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 md:px-12">
-          <div className="grid grid-cols-1 items-center gap-4 sm:gap-6 md:grid-cols-12 md:gap-10 lg:gap-14">
-            {/* Left Column: Bottle Showcase Slot (M04 target for descending M01 bottle) */}
-            <div className="relative flex flex-col items-center justify-center md:col-span-5 lg:col-span-6">
-              {/* Vertical side label inspired by HWAYO reference */}
-              <span
-                aria-hidden="true"
-                className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 -rotate-90 origin-left font-sans text-[9px] uppercase tracking-[0.34em] text-[#A8A8A8]/70"
-              >
-                TJ VODKA · SIGNATURE 70CL
-              </span>
-
-              {/* Pedestal & Spotlight Halo so the TJ Vodka bottle stays clearly highlighted in front of the 50% background */}
-              <div className="relative flex w-full items-center justify-center py-1 md:py-3">
-                {/* Soft studio spotlight halo + contrast cushion behind the bottle */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-y-1 w-[220px] sm:w-[270px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,245,245,0.22)_0%,rgba(8,8,8,0.65)_48%,transparent_76%)] blur-xl"
-                />
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute bottom-2 h-7 w-44 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,245,245,0.28)_0%,rgba(189,189,189,0.08)_55%,transparent_78%)] blur-md"
-                />
-
-                {/* Target Anchor Slot where the continuous bottle settles */}
-                <div
-                  data-media-slot="M04"
-                  className="relative z-20 h-[clamp(170px,24svh,240px)] w-[clamp(85px,12svh,120px)] md:h-[clamp(280px,54svh,440px)] md:w-[clamp(140px,27svh,215px)]"
-                >
-                  <MonochromeMedia slotId="M04" className="h-full w-full" />
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: HWAYO-Inspired Heading, 3 Information Tabs, Specs & Shop CTA */}
-            <div className="flex flex-col md:col-span-7 lg:col-span-6">
+        <div className="relative z-10 mx-auto flex h-full w-full max-w-[1400px] items-center px-6 py-4 md:px-12 md:py-5">
+          <div className="flex w-full flex-col md:ml-auto md:w-[min(100%,640px)] lg:w-[min(100%,700px)]">
               <span className="font-sans text-[10px] uppercase tracking-[0.26em] text-[#A8A8A8]">
                 {SITE_CONTENT.productExplorer.eyebrow}
               </span>
@@ -380,30 +339,30 @@ export function HeroProductStage() {
               </dl>
 
               {/* Flavour range + CTA */}
-              <div className="mt-4 md:mt-5 flex flex-wrap items-center gap-3">
+              <div className="mt-3 grid grid-cols-2 gap-3 md:mt-4">
                 <Link
                   href="/products/tj-vodka"
-                  className="inline-flex items-center gap-2.5 border border-[#BDBDBD]/30 bg-[#050505] px-3 py-1.5 transition-colors hover:border-[#F5F5F5]"
+                  className="inline-flex items-center justify-center gap-3 border border-[#BDBDBD]/40 bg-[#050505] px-3 py-3 transition-colors hover:border-[#F5F5F5] sm:gap-4 sm:px-5 sm:py-3.5"
                 >
                   <img
                     src="/media/bw/m04-bottle-clean.png"
                     alt=""
-                    className="bw-enforced-media h-8 w-4 object-contain object-center"
+                    className="bw-enforced-media h-16 w-8 object-contain object-center sm:h-[4.75rem] sm:w-10"
                   />
-                  <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-[#F5F5F5]">
+                  <span className="font-sans text-xs uppercase tracking-[0.16em] text-[#F5F5F5] sm:text-sm sm:tracking-[0.18em]">
                     Original
                   </span>
                 </Link>
                 <Link
                   href="/products/tj-vodka?flavour=vanilla"
-                  className="inline-flex items-center gap-2.5 border border-[#BDBDBD]/30 bg-[#050505] px-3 py-1.5 transition-colors hover:border-[#F5F5F5]"
+                  className="inline-flex items-center justify-center gap-3 border border-[#BDBDBD]/40 bg-[#050505] px-3 py-3 transition-colors hover:border-[#F5F5F5] sm:gap-4 sm:px-5 sm:py-3.5"
                 >
                   <img
                     src="/media/originals/m11-vanilla-cutout.png"
                     alt=""
-                    className="product-color-media h-8 w-4 object-contain object-center"
+                    className="product-color-media h-16 w-8 object-contain object-center sm:h-[4.75rem] sm:w-10"
                   />
-                  <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-[#F5F5F5]">
+                  <span className="font-sans text-xs uppercase tracking-[0.16em] text-[#F5F5F5] sm:text-sm sm:tracking-[0.18em]">
                     Vanilla
                   </span>
                 </Link>
@@ -422,7 +381,6 @@ export function HeroProductStage() {
               </div>
             </div>
           </div>
-        </div>
       </section>
     </div>
   );
